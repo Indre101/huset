@@ -4,10 +4,6 @@ const menuItems = document.querySelectorAll(".menu-item")
 const readmore = document.querySelector(".readmore");
 const textAboutHuset = document.querySelector(".textAboutHuset");
 
-
-
-
-
 const displayNoneClass = "d-none";
 const showMenuClass = "navigation";
 
@@ -49,6 +45,28 @@ menuItems.forEach(item => {
 mbMenuIcon.onclick = function () {
   toggleBetweenTwoClasses(mbMenuIcon, menuIconClosed, menuIconOpen)
   toggleBetweenTwoClasses(navigationMenu, displayNoneClass, showMenuClass)
+
+}
+
+const volunteerMenuInfo = document.getElementById("volunteerMenuInfo");
+const volunteerMenuAplication = document.getElementById("aplication");
+
+
+const wrapContact = document.getElementById("wrap-contact");
+const generalVolunteeringInformation = document.getElementById("generalVolunteeringInformation");
+
+const wrapContactClass = "wrap-contact"
+const generalVolunteeringInformationClass = "generalVolunteeringInformation"
+
+aplication.onclick = function () {
+  toggleBetweenTwoClasses(wrapContact, displayNoneClass, wrapContactClass)
+  toggleBetweenTwoClasses(generalVolunteeringInformation, generalVolunteeringInformationClass, displayNoneClass)
+
+}
+
+volunteerMenuInfo.onclick = function () {
+  toggleBetweenTwoClasses(generalVolunteeringInformation, displayNoneClass, generalVolunteeringInformationClass)
+  toggleBetweenTwoClasses(wrapContact, wrapContactClass, displayNoneClass)
 
 }
 

@@ -167,7 +167,7 @@ a {
 /*About page  */
 .aboutContainer {
   color: white;
-  background-image: linear-gradient(to right, #887d7d8f, #060603);
+  background-image: linear-gradient(to right, #131212cc, #060603);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,4 +203,61 @@ h1 {
   margin: 1.5rem 0 5rem 0;
   text-decoration: underline;
 
+}
+
+/* Volunteering */
+
+
+.volunteeringInformationMenu {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+/* CONTACT FORM */
+/*  */
+
+
+
+
+
+form span.contact-form-title {
+  font-size: 2rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+
+.generalVolunteeringInformation {
+  display: block;
+}
+
+.wrap-contact {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 300px;
+  height: 40px;
+  margin: 0.5rem 0;
+}
+
+textarea.input {
+  height: 8rem;
+  margin: 3rem 0;
+}
+
+.contact-form {
+  margin: 3rem 0;
+}
+
+.contact-form-btn {
+  color: black;
+  font-size: 1.5rem;
+  border: 1px solid white;
+  padding: 0.5rem;
+  background-color: azure;
 }
