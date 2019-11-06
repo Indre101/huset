@@ -14,6 +14,13 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Avenir Next", sans-serif;
+  scroll-behavior: smooth;
+
+}
+
+
+.pointer {
+  cursor: pointer;
 
 }
 
@@ -133,6 +140,11 @@ header {
   transform-origin: center;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 .menu-item-name:hover {
   font-size: 2rem;
 }
@@ -156,4 +168,39 @@ header {
 .aboutContainer {
   color: white;
   background-image: linear-gradient(to right, #887d7d8f, #060603);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.videoAboutHuset {
+  margin: 2rem 0;
+  width: 250px;
+  height: 200px;
+}
+
+h1 {
+  padding: 2rem 1rem;
+}
+
+.textAboutHuset {
+  transition: height 0.5s linear;
+  height: 100vh;
+
+}
+
+.textAboutHusetCollapsed {
+  height: 265px;
+  overflow: hidden;
+}
+
+.textAboutHusetExpanded {
+  height: fit-content;
+}
+
+.readmore {
+  margin: 1.5rem 0 5rem 0;
+  text-decoration: underline;
+
 }
