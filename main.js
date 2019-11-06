@@ -1,13 +1,28 @@
 const mbMenuIcon = document.querySelector(".mb-menu");
+const navigationMenu = document.querySelector("nav");
 
-mbMenuIcon.addEventListener("click", openMenu);
+console.log(navigationMenu)
 
-let menuClicked = false;
+const displayNoneClass = "d-none";
+const showMenuClass = "navigation";
 
-function openMenu() {
+const menuIconClosed = "menu-icon-closed";
+const menuIconOpen = "menu-icon-open";
 
-  mbMenuIcon.classList.toggle("mb-menu-closed")
-  mbMenuIcon.classList.toggle("mb-menu-open")
 
+
+mbMenuIcon.onclick = function () {
+  toggleBetweenTwoClasses(mbMenuIcon, menuIconClosed, menuIconOpen)
+  toggleBetweenTwoClasses(navigationMenu, displayNoneClass, showMenuClass)
+
+}
+
+
+
+
+
+function toggleBetweenTwoClasses(element, classNameToRemove, classNameToAdd) {
+  element.classList.toggle(classNameToRemove)
+  element.classList.toggle(classNameToAdd)
 
 }

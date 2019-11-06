@@ -1,7 +1,24 @@
+@font-face {
+  font-family: "Avenir Next";
+  src: "/font/AvenirNext.ttc"
+}
+
+
+:root {
+  --primary-color: black;
+  --secondary-color: #D3072A;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Avenir Next", sans-serif;
+
+}
+
+.container {
+  height: 100vh;
 }
 
 .bg-image {
@@ -12,6 +29,7 @@
   position: fixed;
   width: 100%;
   background-repeat: no-repeat;
+  z-index: -1;
 }
 
 
@@ -22,6 +40,8 @@ header {
   bottom: 0;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
 }
 
 .mb-menu {
@@ -33,18 +53,17 @@ header {
   margin-right: 1rem;
   transform-origin: center;
   transition: transform 0.5s;
-
-
+  margin: 0.5rem;
 }
 
 
-.mb-menu-closed {
+.menu-icon-closed {
   background-image: url(/icons-logo/menu-open.svg);
   animation: rotateMenuBack 0.5s ease-in-out forwards 1;
 
 }
 
-.mb-menu-open {
+.menu-icon-open {
   animation: rotateMenu 0.5s ease-in-out forwards 1;
   background-image: url(/icons-logo/menu-open.svg);
 }
@@ -65,8 +84,76 @@ header {
 }
 
 .logo {
-  width: 4rem;
   height: 100vh;
   position: absolute;
   object-fit: contain;
+  padding: 0.5rem 0.3rem;
+}
+
+/* NAVIGATION */
+
+.d-none {
+  display: none;
+
+}
+
+
+.navigation {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: #000000e0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  animation: slideInFromRight 0.5s linear forwards;
+}
+
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+}
+
+
+.menu-item {
+  border-bottom: 1px solid var(--secondary-color);
+  border-top: 1px solid var(--secondary-color);
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item-name {
+  animation: textArrive 0.6s linear forwards 1;
+  transition: font-size 0.5s;
+  transform-origin: center;
+}
+
+.menu-item-name:hover {
+  font-size: 2rem;
+}
+
+@keyframes textArrive {
+
+  0% {
+    transform: translateX(100%);
+  }
+
+  90% {
+    transform: skew(50deg);
+  }
+
+  100% {
+    transform: skew(0);
+  }
+}
+
+/*About page  */
+.aboutContainer {
+  color: white;
+  background-image: linear-gradient(to right, #887d7d8f, #060603);
 }
