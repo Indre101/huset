@@ -182,6 +182,7 @@ a {
 
 h1 {
   padding: 2rem 1rem;
+  text-align: center;
 }
 
 .textAboutHuset {
@@ -208,17 +209,33 @@ h1 {
 /* Volunteering */
 
 
+.vlunteeringContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 150px;
+  align-items: center;
+  padding: 1rem;
+  /* background-image: url(/img/circles.jpg); */
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: #24195dc9;
+  color: white;
+}
+
+
 .volunteeringInformationMenu {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 
+
+.text {
+  padding: 0 0 3rem 0;
+}
+
 /* CONTACT FORM */
 /*  */
-
-
-
 
 
 form span.contact-form-title {
@@ -260,4 +277,9 @@ textarea.input {
   border: 1px solid white;
   padding: 0.5rem;
   background-color: azure;
+}
+
+
+.generalVolunteeringInformation h3 {
+  margin-bottom: 2rem;
 }
