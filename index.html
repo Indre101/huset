@@ -40,14 +40,14 @@
     </section>
     <article id="about" class="aboutContainer">
       <h1>About Huset</h1>
-
+      <!-- 
       <iframe
         class="videoAboutHuset"
         src="https://www.youtube.com/embed/F0-se-Z_bak"
         frameborder="0"
         allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-      ></iframe>
+      ></iframe> -->
       <section class="textAboutHusetContainer">
         <article class="textAboutHuset textAboutHusetCollapsed">
           <p>
@@ -177,6 +177,49 @@
       </div>
     </article>
 
+    <article id="events" class="eventsContainer">
+      <h1>Events</h1>
+
+      <article class="events">
+        <template class="eventTemplate">
+          <section class="event pointer ">
+            <img class="eventImg" src="/img/balsalen-1094x705.jpg" alt="" />
+            <div class="eventInfoContainer">
+              <div class="eventInfo">
+                <h3 class="date">Date</h3>
+                <h2 class="eventName">Event Name</h2>
+                <div class="categories"></div>
+                <h4 class="eventHours">Opening time/door Opens</h4>
+                <h4 class="price">Price</h4>
+              </div>
+
+              <button class="volunteerBtn">Volunteer</button>
+            </div>
+            <article
+              class="eventExtrainformation eventExtrainformationContainer eventHeightfit"
+            >
+              <p class="description">
+                Faces in The Dark Film Festival 2019 Day 1 – Horror &
+                Exploitation Madness ! – Kung-Fu Night! RESERVATIONS can be made
+                via jack.stevenson@mail.dk. Please include “film title(s)” and
+                the number of reservations desired in the subject line of your
+                e-mail, and you will receive a quick confirmation with further
+                info. If you have other questions contact Jack, our house
+                manager, at jack.stevenson@mail.dk, or via 20297013 as a second
+                option. No SMS. 18:30 TICKET COUNTER/Cafe Area Opens / We have
+                open seating / And can only accept CASH or MOBILE PAY / Tickets
+                only sold on evening of show / Ticket prices are 50 kr. per film
+                and 80 kr. per day. All films in English! 19:30 Man of Iron, dir
+                .Chec Chang, Hong Kong, 1972, 35mm 21:30 The Handcuff, dir. Wu
+                Ma, Hong Kong, 1979, 35mm
+              </p>
+            </article>
+          </section>
+        </template>
+      </article>
+    </article>
+
     <script src="main.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

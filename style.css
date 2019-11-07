@@ -283,3 +283,70 @@ textarea.input {
 .generalVolunteeringInformation h3 {
   margin-bottom: 2rem;
 }
+
+/* Events */
+
+.eventsContainer {
+  color: white;
+}
+
+.eventInfoContainer {
+  padding: 0.5rem;
+}
+
+.event {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0 1rem;
+  margin: 1rem;
+  background-color: black;
+  margin: 50px 0.5rem 130px 0.5rem;
+  will-change: max-height;
+}
+
+
+
+.eventExtrainformationContainer {
+  grid-column: span 2;
+  background-color: black;
+  overflow: hidden;
+  transition: max-height .5s ease-in-out;
+
+}
+
+.eventHeightfit {
+  max-height: 0;
+}
+
+
+
+.eventHeightExpand {
+  animation: expandEventInfo .5s ease 1 forwards;
+}
+
+
+@keyframes expandEventInfo {
+  from {
+    max-height: 0;
+  }
+
+  to {
+    max-height: fit-content;
+  }
+
+}
+
+
+.eventImg {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.volunteerBtn {
+  color: white;
+  color: white;
+  background: cornflowerblue;
+  border: none;
+  height: 2rem;
+}
