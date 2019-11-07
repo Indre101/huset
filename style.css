@@ -1,0 +1,285 @@
+@font-face {
+  font-family: "Avenir Next";
+  src: "/font/AvenirNext.ttc"
+}
+
+
+:root {
+  --primary-color: black;
+  --secondary-color: #D3072A;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Avenir Next", sans-serif;
+  scroll-behavior: smooth;
+
+}
+
+
+.pointer {
+  cursor: pointer;
+
+}
+
+.container {
+  height: 100vh;
+}
+
+.bg-image {
+  background-image: url(/img/javier-grixo-p1opmw12wvk-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+
+header {
+  width: 100%;
+  height: 4rem;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.mb-menu {
+  background-size: contain;
+  width: 3rem;
+  height: 3rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 1rem;
+  transform-origin: center;
+  transition: transform 0.5s;
+  margin: 0.5rem;
+}
+
+
+.menu-icon-closed {
+  background-image: url(/icons-logo/menu-open.svg);
+  animation: rotateMenuBack 0.5s ease-in-out forwards 1;
+
+}
+
+.menu-icon-open {
+  animation: rotateMenu 0.5s ease-in-out forwards 1;
+  background-image: url(/icons-logo/menu-open.svg);
+}
+
+@keyframes rotateMenu {
+
+  100% {
+    transform: scale(1.1, 1.1) rotate(360deg);
+  }
+}
+
+@keyframes rotateMenuBack {
+
+  100% {
+    background-image: url(/icons-logo/menu-closed.svg);
+    transform: scale(1, 1) rotate(-360deg);
+  }
+}
+
+.logo {
+  height: 100vh;
+  position: absolute;
+  object-fit: contain;
+  padding: 0.5rem 0.3rem;
+}
+
+/* NAVIGATION */
+
+.d-none {
+  display: none;
+
+}
+
+
+.navigation {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: #000000e0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  animation: slideInFromRight 0.5s linear forwards;
+}
+
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+}
+
+
+.menu-item {
+  border-bottom: 1px solid var(--secondary-color);
+  border-top: 1px solid var(--secondary-color);
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item-name {
+  animation: textArrive 0.6s linear forwards 1;
+  transition: font-size 0.5s;
+  transform-origin: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-item-name:hover {
+  font-size: 2rem;
+}
+
+@keyframes textArrive {
+
+  0% {
+    transform: translateX(100%);
+  }
+
+  90% {
+    transform: skew(50deg);
+  }
+
+  100% {
+    transform: skew(0);
+  }
+}
+
+/*About page  */
+.aboutContainer {
+  color: white;
+  background-image: linear-gradient(to right, #131212cc, #060603);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.videoAboutHuset {
+  margin: 2rem 0;
+  width: 250px;
+  height: 200px;
+}
+
+h1 {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.textAboutHuset {
+  transition: height 0.5s linear;
+  height: 100vh;
+
+}
+
+.textAboutHusetCollapsed {
+  height: 265px;
+  overflow: hidden;
+}
+
+.textAboutHusetExpanded {
+  height: fit-content;
+}
+
+.readmore {
+  margin: 1.5rem 0 5rem 0;
+  text-decoration: underline;
+
+}
+
+/* Volunteering */
+
+
+.vlunteeringContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 150px;
+  align-items: center;
+  padding: 1rem;
+  /* background-image: url(/img/circles.jpg); */
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: #24195dc9;
+  color: white;
+}
+
+
+.volunteeringInformationMenu {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+
+.text {
+  padding: 0 0 3rem 0;
+}
+
+/* CONTACT FORM */
+/*  */
+
+
+form span.contact-form-title {
+  font-size: 2rem;
+  text-align: center;
+  margin: 3rem 0;
+}
+
+
+.generalVolunteeringInformation {
+  display: block;
+}
+
+.wrap-contact {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 300px;
+  height: 40px;
+  margin: 0.5rem 0;
+}
+
+textarea.input {
+  height: 8rem;
+  margin: 3rem 0;
+}
+
+.contact-form {
+  margin: 3rem 0;
+}
+
+.contact-form-btn {
+  color: black;
+  font-size: 1.5rem;
+  border: 1px solid white;
+  padding: 0.5rem;
+  background-color: azure;
+}
+
+
+.generalVolunteeringInformation h3 {
+  margin-bottom: 2rem;
+}
