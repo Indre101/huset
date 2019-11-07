@@ -1,8 +1,18 @@
-const mbMenuIcon = document.querySelector(".mb-menu");
-const navigationMenu = document.querySelector("nav");
-const menuItems = document.querySelectorAll(".menu-item")
-const readmore = document.querySelector(".readmore");
-const textAboutHuset = document.querySelector(".textAboutHuset");
+const querySelectorElement = (argument) => document.querySelector(argument);
+const getElementByItsID = (argument) => document.getElementById(argument);
+const querySelectAll = (argument) => document.querySelectorAll(argument);
+
+const toggleBetweenTwoClasses = (element, classNameToRemove, classNameToAdd) => {
+  element.classList.toggle(classNameToRemove)
+  element.classList.toggle(classNameToAdd)
+
+}
+
+const mbMenuIcon = querySelectorElement(".mb-menu");
+const navigationMenu = querySelectorElement("nav");
+const menuItems = querySelectAll(".menu-item")
+const readmore = querySelectorElement(".readmore");
+const textAboutHuset = querySelectorElement(".textAboutHuset");
 
 const displayNoneClass = "d-none";
 const showMenuClass = "navigation";
@@ -14,11 +24,13 @@ const menuIconOpen = "menu-icon-open";
 const textAboutHusetCollapsedClass = "textAboutHusetCollapsed";
 const textAboutHusetExpandedClass = "textAboutHusetExpanded";
 
+
+
+
+
+
 readmore.onclick = function () {
-
-
   toggleBetweenTwoClasses(textAboutHuset, textAboutHusetCollapsedClass, textAboutHusetExpandedClass)
-
 
   if (readmore.textContent === "Read Less") {
     readmore.textContent = "Read More"
@@ -29,9 +41,6 @@ readmore.onclick = function () {
   }
 
 }
-
-
-
 
 menuItems.forEach(item => {
   item.onclick = function () {
@@ -48,12 +57,12 @@ mbMenuIcon.onclick = function () {
 
 }
 
-const volunteerMenuInfo = document.getElementById("volunteerMenuInfo");
-const volunteerMenuAplication = document.getElementById("aplication");
+const volunteerMenuInfo = getElementByItsID("volunteerMenuInfo");
+const volunteerMenuAplication = getElementByItsID("aplication");
 
 
-const wrapContact = document.getElementById("wrap-contact");
-const generalVolunteeringInformation = document.getElementById("generalVolunteeringInformation");
+const wrapContact = getElementByItsID("wrap-contact");
+const generalVolunteeringInformation = getElementByItsID("generalVolunteeringInformation");
 
 const wrapContactClass = "wrap-contact"
 const generalVolunteeringInformationClass = "generalVolunteeringInformation"
@@ -67,12 +76,5 @@ aplication.onclick = function () {
 volunteerMenuInfo.onclick = function () {
   toggleBetweenTwoClasses(generalVolunteeringInformation, displayNoneClass, generalVolunteeringInformationClass)
   toggleBetweenTwoClasses(wrapContact, wrapContactClass, displayNoneClass)
-
-}
-
-
-function toggleBetweenTwoClasses(element, classNameToRemove, classNameToAdd) {
-  element.classList.toggle(classNameToRemove)
-  element.classList.toggle(classNameToAdd)
 
 }
