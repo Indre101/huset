@@ -180,6 +180,24 @@
     <article id="events" class="eventsContainer">
       <h1>Events</h1>
 
+      <form class="filter" action="">
+        <div class="options" name="option">
+          <label for=""><h2>Event type</h2></label>
+          <template class="inputTemplate">
+            <div class="checkboxContainer">
+              <input class="check" type="checkbox" />
+              <label for=""><h3 class="checkboxName">Name</h3></label>
+            </div>
+          </template>
+        </div>
+
+        <div class="dateRange">
+          <input type="date" name="bday" />
+          <input type="date" name="bday" />
+        </div>
+        <button class="w3-btn w3-blue-grey" type="submit">Done</button>
+      </form>
+
       <article class="events">
         <template class="eventTemplate">
           <section class="event pointer ">

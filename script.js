@@ -1,18 +1,34 @@
 const eventTemplate = querySelectorElement(".eventTemplate").content;
-const events = document.querySelector(".events");
+const events = querySelectorElement(".events");
+const inputTemplate = querySelectorElement(".inputTemplate").content
+
 fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed").then(res => {
   return res.json()
 }).then(showData);
 
 
+
+
+
+
+
+const noDoublicates = (arr) =>
+  arr.filter(function (item, index) {
+    return arr.indexOf(item) >= index;
+  });
+
+const categories = []
+
 function showData(data) {
+
+
   data.forEach(item => {
     item.event_name.forEach(event => {
 
       const cln = eventTemplate.cloneNode(true);
       cln.querySelector(".eventName").textContent = event.event_name;
       cln.querySelector(".date").textContent = item.event_date;
-      console.log(event)
+      // console.log(event)
       event.category.forEach(category => {
         let list = document.createElement("h3");
         list.textContent = category.name;
@@ -22,6 +38,11 @@ function showData(data) {
       cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
       cln.querySelector(".price").textContent = event.price;
       cln.querySelector(".description").textContent = event.post_content;
+      event.category.forEach(cat => {
+
+        categories.push(cat.name);
+
+      })
 
       const eventCard = cln.querySelector(".event");
       const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
@@ -43,4 +64,49 @@ function showData(data) {
 
   })
 
+
+  const filteredCategories = noDoublicates(categories)
+
+
+  filteredCategories.forEach(cat => {
+
+    let clnInput = inputTemplate.cloneNode(true);
+
+    let checkboxName = clnInput.querySelector(".checkboxName")
+    checkboxName.textContent = cat;
+    let check = clnInput.querySelector(".check");
+
+
+    check.onclick = function () {
+
+      if (check.checked === false) {
+        check.checked = true
+
+      } else if (check.checked === true) {
+        check.checked = false
+
+      }
+
+    }
+
+
+    checkboxName.onclick = function () {
+
+      if (check.checked === false) {
+        check.checked = true
+
+      } else if (check.checked === true) {
+        check.checked = false
+
+      }
+
+
+    }
+
+
+
+
+
+    querySelectorElement(".options").appendChild(clnInput);
+  })
 }

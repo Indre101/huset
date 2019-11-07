@@ -350,3 +350,33 @@ textarea.input {
   border: none;
   height: 2rem;
 }
+
+
+.filter {
+  position: fixed;
+  height: 100%;
+  background-color: #5f9ea0bd;
+  z-index: 13;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.checkboxName {
+  display: inline;
+  font-size: 1.5rem;
+}
+
+label h2 {
+  margin: 1.5rem 0;
+  font-size: 2rem;
+
+}
+
+.checkboxContainer {
+  margin: 1rem 0;
+  font-size: 2rem;
+}
