@@ -8,16 +8,15 @@ fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json
 
 
 
-
-
-
-
 const noDoublicates = (arr) =>
   arr.filter(function (item, index) {
     return arr.indexOf(item) >= index;
   });
 
 const categories = []
+
+
+
 
 function showData(data) {
 
@@ -67,44 +66,45 @@ function showData(data) {
 
   const filteredCategories = noDoublicates(categories)
 
-
-  filteredCategories.forEach(cat => {
-
-    let clnInput = inputTemplate.cloneNode(true);
-
-    let checkboxName = clnInput.querySelector(".checkboxName")
-    checkboxName.textContent = cat;
-    let check = clnInput.querySelector(".check");
+  filteredCategories.forEach(cerateCategories)
 
 
-    check.onclick = function () {
 
-      if (check.checked === false) {
-        check.checked = true
-
-      } else if (check.checked === true) {
-        check.checked = false
-
-      }
-
-    }
-
-    checkboxName.onclick = function () {
-
-      if (check.checked === false) {
-        check.checked = true
-
-      } else if (check.checked === true) {
-        check.checked = false
-
-      }
-
-
-    }
-
-    querySelectorElement(".options").appendChild(clnInput);
-  })
 }
+
+const cerateCategories = (cat) => {
+
+  let clnInput = inputTemplate.cloneNode(true);
+  let checkboxName = clnInput.querySelector(".checkboxName")
+  checkboxName.textContent = cat;
+
+  let check = clnInput.querySelector(".check");
+
+
+  checkboxName.onclick = function () {
+    checkIfChecked(check);
+
+  }
+
+  querySelectorElement(".options").appendChild(clnInput);
+
+}
+
+
+
+
+const checkIfChecked = (inputName) => {
+
+  if (inputName.checked === false) {
+    inputName.checked = true
+
+  } else if (inputName.checked === true) {
+    inputName.checked = false
+
+  }
+
+}
+
 
 
 const filterIcon = querySelectorElement(".filterIcon");
