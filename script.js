@@ -25,6 +25,7 @@ function showData(data) {
     item.event_name.forEach(event => {
 
       const cln = eventTemplate.cloneNode(true);
+      const eventCard = cln.querySelector(".event");
       cln.querySelector(".eventName").textContent = event.event_name;
       cln.querySelector(".date").textContent = item.event_date;
       // console.log(event)
@@ -34,16 +35,22 @@ function showData(data) {
         cln.querySelector(".categories").appendChild(list);
       })
 
+
+      // console.log(eventCard)
+
+
       cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
       cln.querySelector(".price").textContent = event.price;
       cln.querySelector(".description").textContent = event.post_content;
+
+
       event.category.forEach(cat => {
 
+        eventCard.classList.add(`${cat.name.toLowerCase().split(' ').join('')}`)
         categories.push(cat.name);
 
       })
 
-      const eventCard = cln.querySelector(".event");
       const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
       const eventExtrainformation = cln.querySelector(".eventExtrainformation");
 
@@ -64,21 +71,59 @@ function showData(data) {
   })
 
 
-  const filteredCategories = noDoublicates(categories)
 
+
+
+  // Creates categories and appends them as input fields
+  const filteredCategories = noDoublicates(categories)
   filteredCategories.forEach(cerateCategories)
 
+  // All events selected
+  const eventCards = querySelectAll(".event");
+
+  eventCards.forEach(item => {
+    // console.log(item)
+  })
+  // console.log(eventCards)
+
+
+  const inputs = querySelectAll(".check")
+  inputs.forEach(inputItem => {
+    // console.log(inputItem);
+
+    // inputItem.addEventListener("click", getTheInputValue)
+  })
+
+}
+
+// let inputsChecked = [];
+
+// const getTheInputValue = () => {
+
+//   console.log(this);
+//   inputsChecked.push(this );
+// }
+
+
+const filterByEventType = (input, nodeList) => {
+
+
+  // element.classList.contains(class);
 
 
 }
 
 const cerateCategories = (cat) => {
 
+  console.log(cat)
+
+
   let clnInput = inputTemplate.cloneNode(true);
   let checkboxName = clnInput.querySelector(".checkboxName")
-  checkboxName.textContent = cat;
-
   let check = clnInput.querySelector(".check");
+  checkboxName.textContent = cat;
+  check.name = cat.toLowerCase().split(' ').join('');
+
 
 
   checkboxName.onclick = function () {
@@ -89,6 +134,8 @@ const cerateCategories = (cat) => {
   querySelectorElement(".options").appendChild(clnInput);
 
 }
+
+
 
 
 
