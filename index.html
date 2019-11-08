@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/white-on-black/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/white-on-black/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/white-on-black/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
     <link rel="stylesheet" href="style.css" />
     <title>Huset Home</title>
   </head>
@@ -178,9 +199,12 @@
     </article>
 
     <article id="events" class="eventsContainer">
-      <h1>Events</h1>
+      <aside class="aside">
+        <h1>Events</h1>
+        <img class="filterIcon" src="/icons-logo/filter.svg" alt="" />
+      </aside>
 
-      <form class="filter" action="">
+      <form class="filter d-none" action="">
         <div class="options" name="option">
           <label for=""><h2>Event type</h2></label>
           <template class="inputTemplate">
@@ -192,10 +216,12 @@
         </div>
 
         <div class="dateRange">
-          <input type="date" name="bday" />
-          <input type="date" name="bday" />
+          <label for=""><h2>Choose Date Period</h2></label>
+
+          <input class="filterByDate" type="date" name="bday" />
+          <input class="filterByDate" type="date" name="bday" />
         </div>
-        <button class="w3-btn w3-blue-grey" type="submit">Done</button>
+        <button class="submitBtn" type="button">Done</button>
       </form>
 
       <article class="events">

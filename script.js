@@ -2,7 +2,7 @@ const eventTemplate = querySelectorElement(".eventTemplate").content;
 const events = querySelectorElement(".events");
 const inputTemplate = querySelectorElement(".inputTemplate").content
 
-fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed").then(res => {
+fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?per_page=100").then(res => {
   return res.json()
 }).then(showData);
 
@@ -89,7 +89,6 @@ function showData(data) {
 
     }
 
-
     checkboxName.onclick = function () {
 
       if (check.checked === false) {
@@ -103,10 +102,23 @@ function showData(data) {
 
     }
 
-
-
-
-
     querySelectorElement(".options").appendChild(clnInput);
   })
+}
+
+
+const filterIcon = querySelectorElement(".filterIcon");
+const filterForm = querySelectorElement(".filter");
+const submitBtn = querySelectorElement(".submitBtn");
+
+const displayFlex = "d-flex"
+
+filterIcon.onclick = function () {
+  toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
+
+}
+
+submitBtn.onclick = function () {
+  toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
+
 }
