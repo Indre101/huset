@@ -295,8 +295,8 @@ textarea.input {
 }
 
 .event {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
+  /* display: grid; */
   grid-gap: 0 1rem;
   margin: 1rem;
   background-color: black;
@@ -394,6 +394,14 @@ label h2 {
 .dateRange {
   display: flex;
   flex-direction: column;
+}
+
+.active {
+  display: grid;
+}
+
+.hide {
+  display: none;
 }
 
 
