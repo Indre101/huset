@@ -18,6 +18,9 @@
 
 }
 
+iframe {
+  border: none;
+}
 
 .pointer {
   cursor: pointer;
@@ -41,8 +44,18 @@
 
 
 header {
+  z-index: 10;
+}
+
+
+.header-menu-closed {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.header-menu-opened {
   width: 100%;
-  height: 4rem;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -53,8 +66,8 @@ header {
 
 .mb-menu {
   background-size: contain;
-  width: 3rem;
-  height: 3rem;
+  width: 5rem;
+  height: 5rem;
   background-repeat: no-repeat;
   background-position: center;
   margin-right: 1rem;
@@ -65,7 +78,7 @@ header {
 
 
 .menu-icon-closed {
-  background-image: url(/icons-logo/menu-open.svg);
+  background-image: url(/icons-logo/menu-closed.svg);
   animation: rotateMenuBack 0.5s ease-in-out forwards 1;
 
 }
@@ -166,6 +179,8 @@ a {
 
 /*About page  */
 .aboutContainer {
+  height: 100vh;
+
   color: white;
   background-image: linear-gradient(to right, #131212cc, #060603);
   display: flex;
@@ -210,14 +225,10 @@ h1 {
 
 
 .vlunteeringContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 60px 150px;
-  align-items: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
-  /* background-image: url(/img/circles.jpg); */
-  /* background-size: cover;
-  background-repeat: no-repeat; */
   background-color: #24195dc9;
   color: white;
 }
@@ -247,7 +258,20 @@ form span.contact-form-title {
 
 .generalVolunteeringInformation {
   display: block;
+  height: 450px;
 }
+
+.informationContainer {
+  display: grid;
+  grid-template-rows: 450px;
+  margin-top: 3rem;
+  grid-gap: 2rem;
+  width: 100%;
+  grid-template-columns: repeat(3, 100%);
+  overflow: scroll;
+}
+
+
 
 .wrap-contact {
   /* height: 100vh; */
@@ -288,6 +312,7 @@ textarea.input {
 
 .eventsContainer {
   color: white;
+  padding: 1rem;
 }
 
 .eventInfoContainer {
@@ -378,14 +403,16 @@ textarea.input {
   font-size: 1.5rem;
 }
 
-label h2 {
-  /* margin: 1.5rem 0; */
+label {
   font-size: 1.5rem;
+  font-size: 2rem;
+  font-family: "Avenir Next", sans-serif;
+  font-weight: bold;
 
 }
 
 .checkboxContainer {
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   font-size: 1rem;
 }
 
@@ -394,6 +421,7 @@ label h2 {
 .dateRange {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .active {
@@ -413,19 +441,23 @@ label h2 {
 
 
 .filterIcon {
+  grid-area: 1/2/ span 1/ span 1;
+  justify-self: flex-end;
   height: 2rem;
   background-color: white;
-  display: inline;
+  margin-right: 1rem;
 }
 
 .aside {
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 
 .aside h1 {
-  display: inline;
+  grid-area: 1/1/ span 1/span 2;
   text-align: center;
-  margin: 0 auto;
 }
 
 input[type=date] {
@@ -460,4 +492,70 @@ input[type=date] {
   background-color: rgb(157, 157, 156);
   /* text-decoration: underline; */
 
+}
+
+
+
+.dot-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dot {
+  background-color: #ffffff78;
+  height: 1rem;
+  width: 1rem;
+}
+
+.dont-active {
+  box-shadow: 10px 10px 10px inset;
+}
+
+/* .textContainerAnimation {
+  animation: shifttext 1s 2s linear forwards 3;
+}
+
+@keyframes shifttext {
+  100% {
+    transform: translateX(-100%);
+  }
+} */
+
+.textContainerVolunteering {
+  transition: transform 3s;
+}
+
+/* log in */
+
+
+.logInForm {
+  height: 100vh;
+  background-color: #5f9ea0c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logInForm input[type=text],
+.logInForm input[type=password] {
+  background-image: none !important;
+}
+
+.logInInput {
+  width: 240px;
+  height: 50px;
+  margin: 1rem;
+  font-size: 1.3rem;
+  border: none;
+}
+
+.logInForm input[type=submit] {
+  background: green;
+  margin: 3rem 0 0 0;
+  height: 50px;
+  width: 240px;
+  border: none;
+  font-size: 2rem;
 }
