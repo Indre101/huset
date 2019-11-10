@@ -356,10 +356,14 @@ textarea.input {
   display: flex;
 }
 
+.d-block {
+  display: block;
+}
+
 .filter {
   position: fixed;
   height: 100%;
-  background-color: #5f9ea0bd;
+  background-color: #000000eb;
   z-index: 13;
   top: 0;
 
@@ -375,7 +379,7 @@ textarea.input {
 }
 
 label h2 {
-  margin: 1.5rem 0;
+  /* margin: 1.5rem 0; */
   font-size: 1.5rem;
 
 }
@@ -385,11 +389,7 @@ label h2 {
   font-size: 1rem;
 }
 
-.submitBtn {
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  background-color: darkturquoise;
-}
+
 
 .dateRange {
   display: flex;
@@ -426,4 +426,38 @@ label h2 {
   display: inline;
   text-align: center;
   margin: 0 auto;
+}
+
+.date {
+  background-color: white;
+  color: grey;
+  height: 2rem;
+  width: 200px;
+  margin: 1rem 0;
+}
+
+.filterBtnsCon {
+  display: flex;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+
+.filterBtns {
+  width: 170px;
+  height: 60px;
+  font-size: 1.5rem;
+  border: none;
+  color: white;
+}
+
+.submitBtn {
+  background-color: #005924;
+}
+
+.clear {
+  background-color: rgb(157, 157, 156);
+  /* text-decoration: underline; */
+
 }

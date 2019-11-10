@@ -204,7 +204,7 @@
         <img class="filterIcon" src="/icons-logo/filter.svg" alt="" />
       </aside>
 
-      <form class="filter d-none" action="">
+      <form class="filter d-flex" action="">
         <div class="options" name="option">
           <label for=""><h2>Event type</h2></label>
           <template class="inputTemplate">
@@ -217,10 +217,14 @@
 
         <div class="dateRange">
           <label for=""><h2>Choose Date Period</h2></label>
-          <input class="filterByDate" type="date" name="bday" />
-          <input class="filterByDate" type="date" name="bday" />
+          <div class="error d-none">The dates selected are not valid</div>
+          <input class="date date1" type="date" name="bday" />
+          <input class="date date2" type="date" name="bday" />
         </div>
-        <button class="submitBtn" type="button">Done</button>
+        <div class="filterBtnsCon">
+          <button class="filterBtns submitBtn" type="button">Done</button>
+          <button class="filterBtns clear" type="button">Clear Filters</button>
+        </div>
       </form>
 
       <article class="events upcomingEvents">
