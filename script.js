@@ -1,46 +1,155 @@
 const eventTemplate = querySelectorElement(".eventTemplate").content;
-const events = document.querySelector(".events");
-fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed").then(res => {
+const upcomingEvents = querySelectorElement(".upcomingEvents");
+const previousEvents = querySelectorElement(".previousEvents");
+const inputTemplate = querySelectorElement(".inputTemplate").content
+
+
+
+
+fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/categories").then(res => {
   return res.json()
-}).then(showData);
+}).then(data => {
+  data.forEach(cerateCategories)
+})
+
+const cerateCategories = (cat) => {
+  if (cat.parent == 0) {
+    return false
+  } else {
+    let clnInput = inputTemplate.cloneNode(true);
+    let checkboxName = clnInput.querySelector(".checkboxName")
+    let check = clnInput.querySelector(".check");
+    checkboxName.textContent = cat.name;
+    check.name = cat.name.toLowerCase().split(' ').join('');
+    checkboxName.onclick = function () {
+      checkIfChecked(check);
+    }
+    querySelectorElement(".options").appendChild(clnInput);
+  }
+}
 
 
-function showData(data) {
-  data.forEach(item => {
-    item.event_name.forEach(event => {
 
-      const cln = eventTemplate.cloneNode(true);
-      cln.querySelector(".eventName").textContent = event.event_name;
-      cln.querySelector(".date").textContent = item.event_date;
-      console.log(event)
-      event.category.forEach(category => {
-        let list = document.createElement("h3");
-        list.textContent = category.name;
-        cln.querySelector(".categories").appendChild(list);
-      })
-
-      cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
-      cln.querySelector(".price").textContent = event.price;
-      cln.querySelector(".description").textContent = event.post_content;
-
-      const eventCard = cln.querySelector(".event");
-      const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
-      const eventExtrainformation = cln.querySelector(".eventExtrainformation");
-
-      const eventHeightfitClass = "eventHeightfit";
-      const eventHeightExpand = "eventHeightExpand";
+fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
+  return res.json()
+}).then(data => {
+  data.sort(compare);
+  console.log(data)
+  data.forEach(showData)
+}).then(filterData);
 
 
-      eventCard.onclick = function () {
-        toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
 
-      }
+const filterIcon = querySelectorElement(".filterIcon");
+const filterForm = querySelectorElement(".filter");
+const submitBtn = querySelectorElement(".submitBtn");
+const displayFlex = "d-flex"
+
+filterIcon.onclick = function () {
+  toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
+}
 
 
-      events.appendChild(cln)
+function compare(a, b) {
+  const dateA = new Date(a.event_date);
+  const dateB = new Date(b.event_date);
+  return dateA - dateB
+}
+
+
+function showData(item) {
+  item.event_name.forEach(event => {
+    const cln = eventTemplate.cloneNode(true);
+    const eventCard = cln.querySelector(".event");
+    cln.querySelector(".eventName").textContent = event.event_name;
+    cln.querySelector(".date").textContent = item.event_date;
+    // cln.querySelector(".eventImg").src = event._embedded["wp:featuredmedia"][0].href;
+    cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
+    cln.querySelector(".price").textContent = event.price;
+    cln.querySelector(".description").textContent = event.post_content;
+    event.category.forEach(category => {
+      let list = document.createElement("h3");
+      list.textContent = category.name;
+      cln.querySelector(".categories").appendChild(list);
+      eventCard.classList.add(`${category.name.toLowerCase().split(' ').join('')}`)
+
     })
-    // console.log(item.event_name)
+    const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
+    const eventExtrainformation = cln.querySelector(".eventExtrainformation");
+    const eventHeightfitClass = "eventHeightfit";
+    const eventHeightExpand = "eventHeightExpand";
+    eventCard.onclick = function () {
+      toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
+    }
 
+    if (compareDates(item)) {
+      upcomingEvents.appendChild(cln)
+    } else if (!compareDates(item)) {
+      previousEvents.appendChild(cln)
+    }
   })
+}
 
+const getCurrentDate = () => new Date().getTime();
+const currentDate = getCurrentDate();
+
+
+function compareDates(schedule) {
+  const dateA = new Date(schedule.event_date).getTime()
+  if (dateA >= currentDate) {
+    return true
+  } else if (dateA < currentDate) {
+    return false
+  }
+}
+
+const options = querySelectorElement(".options");
+let checkedInputs = [];
+let uncheckedInputs = []
+
+function filterData() {
+  const events = querySelectAll(".event");
+  submitBtn.onclick = function () {
+    toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
+    getCheckedInputs();
+    for (let m = 0; m < events.length; m++) {
+      for (let n = 0; n < uncheckedInputs.length; n++) {
+        if (events[m].classList.contains(uncheckedInputs[n])) {
+          events[m].classList.remove("active")
+          events[m].classList.add("hide")
+        }
+      }
+    }
+    for (let i = 0; i < events.length; i++) {
+      for (let j = 0; j < checkedInputs.length; j++) {
+        if (events[i].classList.contains(checkedInputs[j])) {
+          events[i].classList.remove("hide")
+          events[i].classList.add("active")
+        }
+      }
+    }
+  }
+}
+
+function getCheckedInputs() {
+  checkedInputs = [];
+  uncheckedInputs = []
+  const inputs = querySelectAll(".check")
+  inputs.forEach(checkIfCheckedAndPushValue);
+}
+
+function checkIfCheckedAndPushValue(input) {
+  if (input.checked) {
+    checkedInputs.push(input.name);
+  } else if (!input.checked) {
+    uncheckedInputs.push(input.name)
+  }
+}
+
+const checkIfChecked = (inputName) => {
+  if (inputName.checked === false) {
+    inputName.checked = true
+  } else if (inputName.checked === true) {
+    inputName.checked = false
+  }
 }
