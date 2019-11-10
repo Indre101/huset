@@ -1,5 +1,6 @@
 const eventTemplate = querySelectorElement(".eventTemplate").content;
-const events = querySelectorElement(".events");
+const upcomingEvents = querySelectorElement(".upcomingEvents");
+const previousEvents = querySelectorElement(".previousEvents");
 const inputTemplate = querySelectorElement(".inputTemplate").content
 
 
@@ -32,6 +33,8 @@ const cerateCategories = (cat) => {
 fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(data => {
+  data.sort(compare);
+  console.log(data)
   data.forEach(showData)
 }).then(filterData);
 
@@ -47,44 +50,79 @@ filterIcon.onclick = function () {
 }
 
 
-function showData(item) {
-  item.event_name.forEach(showValues)
+function compare(a, b) {
+  const dateA = new Date(a.event_date);
+  const dateB = new Date(b.event_date);
+  return dateA - dateB
 }
 
 
+function showData(item) {
+  item.event_name.forEach(event => {
+    const cln = eventTemplate.cloneNode(true);
+    const eventCard = cln.querySelector(".event");
+    cln.querySelector(".eventName").textContent = event.event_name;
+    cln.querySelector(".date").textContent = item.event_date;
+    // cln.querySelector(".eventImg").src = event._embedded["wp:featuredmedia"][0].href;
+    cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
+    cln.querySelector(".price").textContent = event.price;
+    cln.querySelector(".description").textContent = event.post_content;
+    event.category.forEach(category => {
+      let list = document.createElement("h3");
+      list.textContent = category.name;
+      cln.querySelector(".categories").appendChild(list);
+      eventCard.classList.add(`${category.name.toLowerCase().split(' ').join('')}`)
+
+    })
+    const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
+    const eventExtrainformation = cln.querySelector(".eventExtrainformation");
+    const eventHeightfitClass = "eventHeightfit";
+    const eventHeightExpand = "eventHeightExpand";
+    eventCard.onclick = function () {
+      toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
+    }
+
+    if (compareDates(item)) {
+      upcomingEvents.appendChild(cln)
+    } else if (!compareDates(item)) {
+      previousEvents.appendChild(cln)
+    }
+  })
+}
+
+const getCurrentDate = () => new Date().getTime();
+const currentDate = getCurrentDate();
+
+
+function compareDates(schedule) {
+  const dateA = new Date(schedule.event_date).getTime()
+  if (dateA >= currentDate) {
+    return true
+  } else if (dateA < currentDate) {
+    return false
+  }
+}
 
 const options = querySelectorElement(".options");
+let checkedInputs = [];
+let uncheckedInputs = []
 
 function filterData() {
-
   const events = querySelectAll(".event");
-  // const inputs = querySelectAll(".check")
-  // const checkboxContainer = querySelectAll(".checkboxContainer");
-  // checkboxContainer.forEach(containerClicked)
-
-
-  // options.addEventListener("click", getCheckedInputs)
   submitBtn.onclick = function () {
-    // toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
+    toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
     getCheckedInputs();
-    // Checks the checked inputs
-
     for (let m = 0; m < events.length; m++) {
       for (let n = 0; n < uncheckedInputs.length; n++) {
-
         if (events[m].classList.contains(uncheckedInputs[n])) {
-          console.log(events[m])
           events[m].classList.remove("active")
           events[m].classList.add("hide")
         }
       }
     }
-
-
     for (let i = 0; i < events.length; i++) {
       for (let j = 0; j < checkedInputs.length; j++) {
         if (events[i].classList.contains(checkedInputs[j])) {
-          console.log(events[i])
           events[i].classList.remove("hide")
           events[i].classList.add("active")
         }
@@ -94,19 +132,11 @@ function filterData() {
 }
 
 function getCheckedInputs() {
+  checkedInputs = [];
+  uncheckedInputs = []
   const inputs = querySelectAll(".check")
   inputs.forEach(checkIfCheckedAndPushValue);
 }
-
-
-// const noDoublicates = (arr) =>
-//   arr.filter(function (item, index) {
-//     console.log("called")
-//     return arr.indexOf(item) >= index;
-//   });
-
-let checkedInputs = [];
-let uncheckedInputs = []
 
 function checkIfCheckedAndPushValue(input) {
   if (input.checked) {
@@ -116,84 +146,10 @@ function checkIfCheckedAndPushValue(input) {
   }
 }
 
-
-const checkIfEventHasClass = (arr, input, inputText) => {
-  arr.forEach(ev => {
-
-    // if (ev.classList.contains("hide") && (ev.classList.contains(input) || ev.classList.contains(inputText))) {
-    //   console.log("contains hide")
-    // } else 
-    if (ev.classList.contains(input) || ev.classList.contains(inputText)) {
-      console.log("checkedkkk")
-      // toggleBetweenTwoClasses(ev, "hide", "active");
-      // ev.classList.toggle("hide")
-      ev.classList.add("active")
-      ev.classList.remove("hide");
-      console.log(ev);
-
-
-      // ev.classList.remove("hide")
-      // ev.classList.add("active")
-      // ev.style.display = "grid";
-    } else if (!ev.classList.contains(input) || !ev.classList.contains(inputText)) {
-      ev.classList.add("hide");
-      ev.classList.remove("active");
-    }
-  });
-};
-
-
-const uncheckedTheInput = (arr, input, inputText) => {
-  arr.forEach(ev => {
-    if (ev.classList.contains(input) || ev.classList.contains(inputText)) {
-      ev.classList.remove("active")
-      ev.classList.add("hide")
-      // ev.style.display = "none";
-      // ev.style.display = "none";
-      console.log(ev);
-    }
-  });
-};
-
-
-
 const checkIfChecked = (inputName) => {
   if (inputName.checked === false) {
     inputName.checked = true
   } else if (inputName.checked === true) {
     inputName.checked = false
   }
-}
-
-
-
-
-const showValues = (event, item) => {
-
-  const cln = eventTemplate.cloneNode(true);
-  const eventCard = cln.querySelector(".event");
-  cln.querySelector(".eventName").textContent = event.event_name;
-  cln.querySelector(".date").textContent = item.event_date;
-  // cln.querySelector(".eventImg").src = event._embedded["wp:featuredmedia"][0].href;
-  cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
-  cln.querySelector(".price").textContent = event.price;
-  cln.querySelector(".description").textContent = event.post_content;
-  event.category.forEach(category => {
-    let list = document.createElement("h3");
-    list.textContent = category.name;
-    cln.querySelector(".categories").appendChild(list);
-    eventCard.classList.add(`${category.name.toLowerCase().split(' ').join('')}`)
-
-  })
-  const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
-  const eventExtrainformation = cln.querySelector(".eventExtrainformation");
-  const eventHeightfitClass = "eventHeightfit";
-  const eventHeightExpand = "eventHeightExpand";
-  eventCard.onclick = function () {
-    toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
-
-  }
-
-  events.appendChild(cln)
-
 }
