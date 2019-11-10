@@ -180,6 +180,7 @@ a {
 /*About page  */
 .aboutContainer {
   height: 100vh;
+
   color: white;
   background-image: linear-gradient(to right, #131212cc, #060603);
   display: flex;
@@ -311,6 +312,7 @@ textarea.input {
 
 .eventsContainer {
   color: white;
+  padding: 1rem;
 }
 
 .eventInfoContainer {
@@ -450,9 +452,10 @@ label {
   text-align: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 
-.aside h2 {
+.aside h1 {
   grid-area: 1/1/ span 1/span 2;
   text-align: center;
 }
@@ -521,4 +524,38 @@ input[type=date] {
 
 .textContainerVolunteering {
   transition: transform 3s;
+}
+
+/* log in */
+
+
+.logInForm {
+  height: 100vh;
+  background-color: #5f9ea0c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logInForm input[type=text],
+.logInForm input[type=password] {
+  background-image: none !important;
+}
+
+.logInInput {
+  width: 240px;
+  height: 50px;
+  margin: 1rem;
+  font-size: 1.3rem;
+  border: none;
+}
+
+.logInForm input[type=submit] {
+  background: green;
+  margin: 3rem 0 0 0;
+  height: 50px;
+  width: 240px;
+  border: none;
+  font-size: 2rem;
 }
