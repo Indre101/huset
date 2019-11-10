@@ -428,7 +428,7 @@ label h2 {
   margin: 0 auto;
 }
 
-.date {
+input[type=date] {
   background-color: white;
   color: grey;
   height: 2rem;
