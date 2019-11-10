@@ -46,14 +46,19 @@ menuItems.forEach(item => {
   item.onclick = function () {
     toggleBetweenTwoClasses(navigationMenu, showMenuClass, displayNoneClass)
     toggleBetweenTwoClasses(mbMenuIcon, menuIconOpen, menuIconClosed)
+    toggleBetweenTwoClasses(header, "header-menu-opened", "header-menu-closed")
+
 
 
   }
 })
 
+const header = querySelectorElement("header");
+
 mbMenuIcon.onclick = function () {
   toggleBetweenTwoClasses(mbMenuIcon, menuIconClosed, menuIconOpen)
   toggleBetweenTwoClasses(navigationMenu, displayNoneClass, showMenuClass)
+  toggleBetweenTwoClasses(header, "header-menu-closed", "header-menu-opened")
 
 }
 
@@ -76,5 +81,62 @@ aplication.onclick = function () {
 volunteerMenuInfo.onclick = function () {
   toggleBetweenTwoClasses(generalVolunteeringInformation, displayNoneClass, generalVolunteeringInformationClass)
   toggleBetweenTwoClasses(wrapContact, wrapContactClass, displayNoneClass)
+
+}
+
+
+// animation
+
+
+const textContainerVolunteering = querySelectAll(".textContainerVolunteering");
+const dots = querySelectAll(".dot");
+let a = 0
+let scrollCount = 0;
+
+
+
+
+
+function moveTextItems() {
+  dots.forEach(d => {
+    d.style.backgroundColor = "";
+  })
+  scrollCount++
+  if (scrollCount === textContainerVolunteering.length) {
+    a = 0
+    scrollCount = 0;
+    moveText()
+
+  } else {
+    a += 100
+    moveText()
+  }
+
+}
+
+
+const movingText = () => setInterval(moveTextItems, 6000);
+movingText()
+
+textContainerVolunteering.forEach(textItem => {
+  textItem.addEventListener("click", stopAnimation)
+
+})
+
+
+function moveText() {
+  textContainerVolunteering.forEach(textItem => {
+    dots[scrollCount].style.backgroundColor = "white";
+    textItem.style.transform = `translateX(-${a}vw)`;
+  })
+}
+
+
+
+function stopAnimation() {
+  clearInterval(movingText);
+  setTimeout(() => {
+    movingText()
+  }, 10000);
 
 }
