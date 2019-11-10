@@ -3,9 +3,6 @@ const upcomingEvents = querySelectorElement(".upcomingEvents");
 const previousEvents = querySelectorElement(".previousEvents");
 const inputTemplate = querySelectorElement(".inputTemplate").content
 
-
-
-
 fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/categories").then(res => {
   return res.json()
 }).then(data => {
@@ -29,14 +26,12 @@ const cerateCategories = (cat) => {
 }
 
 
-
 fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(data => {
   data.sort(compare);
-  console.log(data)
   data.forEach(showData)
-}).then(filterData);
+}).then(filterData)
 
 
 
