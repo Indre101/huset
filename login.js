@@ -45,6 +45,7 @@ function activeCalendarDates(schedules) {
     datesNotDisplayed.forEach(dat => {
 
       if (dat.textContent == schedule.title.rendered) {
+        console.log(schedule.title.rendered)
         dat.parentElement.style.backgroundColor = "red";
       }
     })
@@ -179,19 +180,13 @@ daysArr.forEach(d => {
     day.classList.add("day");
     day.textContent = dayNumber;
     let dateStr = `${monthNumber}/${dayNumber}/2019`;
-
-
     const notShowDate = document.createElement("div")
     notShowDate.classList.add("notShowDate")
     notShowDate.classList.add("d-none")
-
     notShowDate.textContent = dateStr
-
     let dayOftheWeek = getDayName(dateStr, "eu-Eu");
     const weekDayName = document.createElement("p");
     weekDayName.textContent = dayOftheWeek
-
-
     day.appendChild(notShowDate)
     day.appendChild(weekDayName)
     days.appendChild(day);

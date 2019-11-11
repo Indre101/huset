@@ -133,6 +133,7 @@ function getEventsThatHaveTheClass(eventsArr, inputsArr, class1, class2) {
         eventsArr[i].classList.remove(class1)
         eventsArr[i].classList.add(class2)
         filterByDate(eventsArr[i])
+        console.log(eventsArr[i]);
       }
     }
   }

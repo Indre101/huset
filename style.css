@@ -313,7 +313,7 @@ textarea.input {
 
 .eventsContainer {
   color: white;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .eventInfoContainer {
@@ -394,7 +394,7 @@ textarea.input {
   top: 0;
 
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   justify-content: space-around;
   align-items: center;
 }
@@ -537,7 +537,20 @@ input[type=date] {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  animation: showLogIn 0.5s linear 1 forwards;
+
 }
+
+@keyframes showLogIn {
+  0% {
+    transform: translateY(100vh);
+  }
+}
+
+
 
 .logInForm input[type=text],
 .logInForm input[type=password] {
