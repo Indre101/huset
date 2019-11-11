@@ -24,6 +24,7 @@ iframe {
 
 .pointer {
   cursor: pointer;
+  cursor: pointer;
 
 }
 
@@ -32,7 +33,7 @@ iframe {
 }
 
 .bg-image {
-  background-image: url(/img/javier-grixo-p1opmw12wvk-unsplash.jpg);
+  background-image: url(./img/javier-grixo-p1opmw12wvk-unsplash.jpg);
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -78,14 +79,14 @@ header {
 
 
 .menu-icon-closed {
-  background-image: url(/icons-logo/menu-closed.svg);
+  background-image: url(./icons-logo/menu-closed.svg);
   animation: rotateMenuBack 0.5s ease-in-out forwards 1;
 
 }
 
 .menu-icon-open {
   animation: rotateMenu 0.5s ease-in-out forwards 1;
-  background-image: url(/icons-logo/menu-open.svg);
+  background-image: url(./icons-logo/menu-open.svg);
 }
 
 @keyframes rotateMenu {
@@ -98,7 +99,7 @@ header {
 @keyframes rotateMenuBack {
 
   100% {
-    background-image: url(/icons-logo/menu-closed.svg);
+    background-image: url(./icons-logo/menu-closed.svg);
     transform: scale(1, 1) rotate(-360deg);
   }
 }
