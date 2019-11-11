@@ -29,7 +29,6 @@ const cerateCategories = (cat) => {
 fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(data => {
-  console.log(data)
   data.sort(compare);
   data.forEach(showData)
 }).then(filterData)
@@ -54,7 +53,6 @@ function compare(a, b) {
 
 
 function showData(item) {
-  console.log("calledItem")
   item.event_name.forEach(event => {
     const cln = eventTemplate.cloneNode(true);
     const eventCard = cln.querySelector(".event");
