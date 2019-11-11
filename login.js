@@ -143,13 +143,13 @@ daysArr.forEach(d => {
   const clnMonth = monthTemplate.cloneNode(true);
   const days = clnMonth.querySelector(".days");
 
-  for (let dayNumber = 1; dayNumber < d; dayNumber++) {
+  for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
 
     const day = document.createElement("div");
     day.classList.add("day");
     day.textContent = dayNumber;
-    let dateStr = `${dayNumber}/${monthNumber}/2019`;
-    let dayOftheWeek = getDayName(dateStr, "en-Eu");
+    let dateStr = `${monthNumber}/${dayNumber}/2019`;
+    let dayOftheWeek = getDayName(dateStr, "eu-Eu");
     console.log(dateStr)
 
     const weekDayName = document.createElement("p");
