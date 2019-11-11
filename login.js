@@ -12,7 +12,8 @@ fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-jso
 }).then(schedules => {
   // console.log(schedules)
   schedules.forEach(getSchedules);
-}).then(showVolunteers)
+
+})
 
 
 const volunteers = []
@@ -23,6 +24,7 @@ let filteredCategoriesArray = () =>
 
 function getSchedules(schedule) {
 
+  compareTheEventAndVulteerScheduleDates(schedule)
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
       const volunteer = new Volunteer(oneEvent.volunteer[key].ID, oneEvent.volunteer[key].post_title, oneEvent.volunteer[key].last_name, "./img/circles.png", oneEvent.volunteer[key].pass)
@@ -30,6 +32,12 @@ function getSchedules(schedule) {
     }
   })
 
+}
+
+
+function compareTheEventAndVulteerScheduleDates(schedule) {
+  console.log(schedule.title.rendered);
+  console.log(querySelectAll(".notShowDate"))
 }
 
 function Volunteer(id, name, lastName, imgVolunteer, psw) {
@@ -150,9 +158,20 @@ daysArr.forEach(d => {
     day.classList.add("day");
     day.textContent = dayNumber;
     let dateStr = `${monthNumber}/${dayNumber}/2019`;
+
+
+    const notShowDate = document.createElement("div")
+    notShowDate.classList.add("notShowDate")
+    notShowDate.classList.add("d-none")
+
+    notShowDate.textContent = dateStr
+
     let dayOftheWeek = getDayName(dateStr, "eu-Eu");
     const weekDayName = document.createElement("p");
     weekDayName.textContent = dayOftheWeek
+
+
+    day.appendChild(notShowDate)
     day.appendChild(weekDayName)
     days.appendChild(day);
   }
