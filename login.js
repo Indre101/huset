@@ -139,74 +139,22 @@ let months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 let monthNumber = 0;
 const daysArr = getDaysCount()
-console.log(daysArr)
 daysArr.forEach(d => {
-
   const clnMonth = monthTemplate.cloneNode(true);
   const days = clnMonth.querySelector(".days");
   const monthName = clnMonth.querySelector(".monthName");
   monthName.textContent = months[monthNumber];
-
   monthNumber++;
-
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
-
     const day = document.createElement("div");
     day.classList.add("day");
     day.textContent = dayNumber;
     let dateStr = `${monthNumber}/${dayNumber}/2019`;
     let dayOftheWeek = getDayName(dateStr, "eu-Eu");
-    console.log(dateStr)
-
     const weekDayName = document.createElement("p");
     weekDayName.textContent = dayOftheWeek
-
-
-
     day.appendChild(weekDayName)
     days.appendChild(day);
-    //       console.log(dateStr)
-
   }
-
-
   calendar.appendChild(clnMonth)
-
-
 })
-
-
-
-
-
-
-
-// function appendDays() {
-//   const clnMonth = monthTemplate.cloneNode(true);
-
-
-//   let monthNumber = 0;
-
-//   do {
-//     monthNumber++
-//     for (let b = 1; b <= getDaysCount(); b++) {
-//       const days = clnMonth.querySelector(".days");
-//       const day = document.createElement("div");
-//       day.classList.add("day");
-//       day.textContent = b;
-//       days.appendChild(day);
-//       let dateStr = `${b}/${monthNumber}/2019`;
-//       let dayOftheWeek = getDayName(dateStr, "nl-NL");
-//       console.log(dateStr)
-
-//     }
-//   } while (monthNumber <= 12);
-
-
-//   calendar.appendChild(clnMonth)
-
-// }
-
-
-// appendDays()
-// console.log(getDaysInMonth(2, 2020))
