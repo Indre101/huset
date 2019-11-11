@@ -29,6 +29,7 @@ const cerateCategories = (cat) => {
 fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(data => {
+  console.log(data)
   data.sort(compare);
   data.forEach(showData)
 }).then(filterData)
@@ -53,6 +54,7 @@ function compare(a, b) {
 
 
 function showData(item) {
+  console.log("calledItem")
   item.event_name.forEach(event => {
     const cln = eventTemplate.cloneNode(true);
     const eventCard = cln.querySelector(".event");
@@ -91,7 +93,6 @@ const currentDate = getCurrentDate();
 
 function compareDates(schedule) {
   const dateA = new Date(schedule.event_date).getTime()
-  // const dateZ = new Date(currentDate).toLocaleDateString("eu-EU");
   if (dateA >= currentDate) {
     return true
   } else if (dateA < currentDate) {
@@ -121,24 +122,12 @@ function filterData() {
 
       getEventsThatHaveTheClass(events, uncheckedInputs, active, hide)
       getEventsThatHaveTheClass(events, checkedInputs, hide, active)
-      console.log(checkedInputs)
-      // for (let m = 0; m < events.length; m++) {
-      //   for (let n = 0; n < uncheckedInputs.length; n++) {
-      //     if (events[m].classList.contains(uncheckedInputs[n])) {
-      //       events[m].classList.remove("active")
-      //       events[m].classList.add("hide")
-
-      //     }
-      //   }
-      // }
-
     }
 
   }
 }
 
 function getEventsThatHaveTheClass(eventsArr, inputsArr, class1, class2) {
-  console.log("kjkjkl")
   for (let i = 0; i < eventsArr.length; i++) {
     for (let j = 0; j < inputsArr.length; j++) {
       if (eventsArr[i].classList.contains(inputsArr[j])) {
