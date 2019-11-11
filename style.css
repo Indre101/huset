@@ -551,11 +551,18 @@ input[type=date] {
   border: none;
 }
 
-.logInForm input[type=submit] {
+.logInbtn {
   background: green;
   margin: 3rem 0 0 0;
   height: 50px;
   width: 240px;
   border: none;
   font-size: 2rem;
+}
+
+.userIcon {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 4rem;
 }
