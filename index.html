@@ -51,11 +51,9 @@
             <h2 class="menu-item-name">Events</h2>
           </div>
         </a>
-        <a href="#logInPage">
-          <div class="menu-item pointer">
-            <h2 class="menu-item-name">Log in</h2>
-          </div>
-        </a>
+        <div class="menu-item menu-item-log-in pointer">
+          <h2 class="menu-item-name">Log in</h2>
+        </div>
       </nav>
       <div class="mb-menu menu-icon-closed pointer"></div>
     </header>
@@ -273,15 +271,41 @@
     </article>
   </div>
 
-  <div id="logInPage" class="logInPage">
+  <div id="logInPage" class="logInPage d-none">
     <form class="logInForm">
       <img src="./icons-logo/user.svg" alt="">
       <input class="logInInput userName" type="text" name="username" placeholder="username" autofill="off"
         autocomplete="off" required>
       <input class="logInInput userPsw" type="password" name="password" placeholder="password" required>
-      <input class="logInBtn" type="submit" value="Login">
+      <input class="logInBtn logInBtn-bg" type="submit" value="Login">
+      <button class="closeLogIn" type="submit" value="Return">Return</button>
     </form>
   </div>
+
+  <div class="userPage">
+    <!-- <template> -->
+    <div>
+      <img class="userMenuIcon" src="/icons-logo/user.svg" alt="">
+      <h3>Hi, Olivia</h3>
+    </div>
+    <div class="information">
+      <div class="calendar">
+        <div class="monthName">
+          <h3>monthName</h3>
+        </div>
+        <div class="days">
+          <div class="day"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- </template> -->
+
+
+
+  </div>
+
+
   <script src="main.js"></script>
   <script src="login.js"></script>
   <script src="script.js"></script>

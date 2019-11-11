@@ -566,3 +566,8 @@ input[type=date] {
   width: 10rem;
   margin: 3rem;
 }
+
+.userPage {
+  height: 100vh;
+  /* padding: 1rem; */
+}

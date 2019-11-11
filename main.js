@@ -43,16 +43,15 @@ readmore.onclick = function () {
 }
 
 menuItems.forEach(item => {
-  item.onclick = function () {
-    toggleBetweenTwoClasses(navigationMenu, showMenuClass, displayNoneClass)
-    toggleBetweenTwoClasses(mbMenuIcon, menuIconOpen, menuIconClosed)
-    toggleBetweenTwoClasses(header, "header-menu-opened", "header-menu-closed")
-
-
-
-  }
+  item.addEventListener("click", hideMenus)
 })
 
+function hideMenus() {
+  toggleBetweenTwoClasses(navigationMenu, showMenuClass, displayNoneClass)
+  toggleBetweenTwoClasses(mbMenuIcon, menuIconOpen, menuIconClosed)
+  toggleBetweenTwoClasses(header, "header-menu-opened", "header-menu-closed")
+
+}
 const header = querySelectorElement("header");
 
 mbMenuIcon.onclick = function () {
