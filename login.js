@@ -134,14 +134,20 @@ function getDaysCount() {
 }
 
 
+
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 let monthNumber = 0;
 const daysArr = getDaysCount()
 console.log(daysArr)
 daysArr.forEach(d => {
 
-  monthNumber++;
   const clnMonth = monthTemplate.cloneNode(true);
   const days = clnMonth.querySelector(".days");
+  const monthName = clnMonth.querySelector(".monthName");
+  monthName.textContent = months[monthNumber];
+
+  monthNumber++;
 
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
 
@@ -155,11 +161,14 @@ daysArr.forEach(d => {
     const weekDayName = document.createElement("p");
     weekDayName.textContent = dayOftheWeek
 
+
+
     day.appendChild(weekDayName)
     days.appendChild(day);
     //       console.log(dateStr)
 
   }
+
 
   calendar.appendChild(clnMonth)
 
