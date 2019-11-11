@@ -63,8 +63,8 @@
   <article id="about" class="aboutContainer">
     <h1>About Huset</h1>
 
-    <iframe class="videoAboutHuset" src="https://www.youtube.com/embed/F0-se-Z_bak"
-      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture " allowfullscreen></iframe>
+    <!-- <iframe class="videoAboutHuset" src="https://www.youtube.com/embed/F0-se-Z_bak"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture " allowfullscreen></iframe> -->
     <aside class="textAboutHusetContainer">
       <aside class="textAboutHuset textAboutHusetCollapsed">
         <p>
@@ -199,7 +199,7 @@
   <div id="events" class="eventsContainer">
     <article class="aside">
       <h1>Events</h1>
-      <img class="filterIcon" src="/icons-logo/filter.svg" alt="" />
+      <img class="filterIcon" src="./icons-logo/filter.svg" alt="" />
     </article>
 
     <form class="filter d-none">
@@ -235,7 +235,7 @@
       <h3>Upcoming Events</h3>
       <template class="eventTemplate">
         <section class="event pointer active">
-          <img class="eventImg" src="/img/balsalen-1094x705.jpg" alt="" />
+          <img class="eventImg" src="./img/balsalen-1094x705.jpg" alt="" />
           <div class="eventInfoContainer">
             <div class="eventInfo">
               <h3 class="date">Date</h3>
@@ -275,9 +275,11 @@
 
   <div id="logInPage" class="logInPage">
     <form class="logInForm">
-      <input class="logInInput" type="text" name="username" placeholder="username" autofill=off required>
-      <input class="logInInput" type="password" name="password" placeholder="password" required>
-      <input type="submit" value="Login">
+      <img src="./icons-logo/user.svg" alt="">
+      <input class="logInInput userName" type="text" name="username" placeholder="username" autofill="off"
+        autocomplete="off" required>
+      <input class="logInInput userPsw" type="password" name="password" placeholder="password" required>
+      <input class="logInBtn" type="submit" value="Login">
     </form>
   </div>
   <script src="main.js"></script>

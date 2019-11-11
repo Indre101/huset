@@ -560,3 +560,9 @@ input[type=date] {
   border: none;
   font-size: 2rem;
 }
+
+
+.logInForm img {
+  width: 10rem;
+  margin: 3rem;
+}
