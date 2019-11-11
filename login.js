@@ -5,7 +5,7 @@ const trySth = () => {
 
 }
 
-fetch("http://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
+fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(data => {
   console.log(data)
