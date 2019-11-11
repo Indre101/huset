@@ -10,7 +10,7 @@ const closeLogIn = querySelectorElement(".closeLogIn");
 fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(schedules => {
-  // console.log(schedules)
+  activeCalendarDates(schedules)
   schedules.forEach(getSchedules);
 
 })
@@ -22,23 +22,44 @@ let filteredCategoriesArray = () =>
     return volunteers.indexOf(item) >= index;
   });
 
-function getSchedules(schedule) {
 
-  compareTheEventAndVulteerScheduleDates(schedule)
+
+function getSchedules(schedule) {
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
       const volunteer = new Volunteer(oneEvent.volunteer[key].ID, oneEvent.volunteer[key].post_title, oneEvent.volunteer[key].last_name, "./img/circles.png", oneEvent.volunteer[key].pass)
       volunteers.push(volunteer);
     }
   })
-
 }
 
 
-function compareTheEventAndVulteerScheduleDates(schedule) {
-  console.log(schedule.title.rendered);
-  console.log(querySelectAll(".notShowDate"))
+
+
+function activeCalendarDates(schedules) {
+
+  let datesNotDisplayed = getDisplayNoneDateFields()
+
+  schedules.forEach(schedule => {
+
+    datesNotDisplayed.forEach(dat => {
+
+      if (dat.textContent == schedule.title.rendered) {
+        dat.parentElement.style.backgroundColor = "red";
+      }
+    })
+
+  })
+
+
+
 }
+
+const getDisplayNoneDateFields = () => querySelectAll(".notShowDate")
+
+
+
+
 
 function Volunteer(id, name, lastName, imgVolunteer, psw) {
   this.id = id;
