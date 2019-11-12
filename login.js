@@ -27,7 +27,7 @@ fetch(
       activeCalendarDates(volunteerWorkdates, "blue");
       volunteerWorkdates = [];
 
-      // logInPage.style.display = "none";
+      logInPage.style.display = "none";
     };
 
     activeCalendarDates(schedules, "red");
