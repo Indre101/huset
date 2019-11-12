@@ -10,10 +10,43 @@ const closeLogIn = querySelectorElement(".closeLogIn");
 fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
   return res.json()
 }).then(schedules => {
+
+  logInBtn.onclick = function () {
+    event.preventDefault();
+    const uniquevolunteers = showVolunteers()
+    const userActive = ceckLogInInfo(uniquevolunteers)
+    console.log(userActive)
+
+    getTheScheduleOfVolunteer(schedules, userActive);
+
+  }
+
   activeCalendarDates(schedules)
-  schedules.forEach(getSchedules);
+  schedules.forEach(getVolunteeers);
+  // schedules.forEach(getTheScheduleOfVolunteer);
 
 })
+
+
+function getTheScheduleOfVolunteer(schedule, volunteerObj) {
+  schedule.forEach(sch => {
+    sch.event_name.forEach(ev => {
+
+      for (var key of Object.keys(ev.volunteer)) {
+
+        if (key == volunteerObj.id) {
+          console.log(ev);
+        }
+        // const volunteer = new Volunteer(oneEvent.volunteer[key].ID, oneEvent.volunteer[key].post_title, oneEvent.volunteer[key].last_name, "./img/circles.png", oneEvent.volunteer[key].pass)
+        // volunteers.push(volunteer);
+      }
+    })
+
+
+
+  })
+
+}
 
 
 const volunteers = []
@@ -24,7 +57,7 @@ let filteredCategoriesArray = () =>
 
 
 
-function getSchedules(schedule) {
+function getVolunteeers(schedule) {
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
       const volunteer = new Volunteer(oneEvent.volunteer[key].ID, oneEvent.volunteer[key].post_title, oneEvent.volunteer[key].last_name, "./img/circles.png", oneEvent.volunteer[key].pass)
@@ -34,33 +67,18 @@ function getSchedules(schedule) {
 }
 
 
-// if ("01/03/2019" == "01/03/2019") {
-//   console.log(true);
-// }
-
-
 function activeCalendarDates(schedules) {
-  // console.log(schedules)
-
   let datesNotDisplayed = getDisplayNoneDateFields()
-  // console.log(datesNotDisplayed)
   schedules.forEach(schedule => {
-    console.log(typeof (schedule.title.rendered))
-
     datesNotDisplayed.forEach(dat => {
-      console.log(typeof (dat.textContent))
-
       if (dat.textContent === schedule.title.rendered) {
-        console.log("true")
         dat.parentElement.style.backgroundColor = "red";
       }
     })
-
   })
-
-
-
 }
+
+
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate")
 
@@ -78,16 +96,6 @@ function showVolunteers() {
     .map(id => {
       return volunteers.find(a => a.id === id)
     })
-
-
-}
-
-logInBtn.onclick = function () {
-  event.preventDefault();
-
-  const uniquevolunteers = showVolunteers()
-  const userActive = ceckLogInInfo(uniquevolunteers)
-
 }
 
 
@@ -103,7 +111,6 @@ loginMenuItem.onclick = function () {
   toggleBetweenTwoClasses(logInPage, displayNoneClass, displayBlock)
 }
 closeLogIn.onclick = function () {
-
   toggleBetweenTwoClasses(logInPage, displayBlock, displayNoneClass)
 
 }
@@ -112,6 +119,7 @@ closeLogIn.onclick = function () {
 
 
 
+// CREATING CALENDAR
 let getDaysInMonth = function (month, year) {
   // Here January is 1 based
   //Day 0 is the last day in the previous month
@@ -119,7 +127,6 @@ let getDaysInMonth = function (month, year) {
   // Here January is 0 based
   // return new Date(year, month+1, 0).getDate();
 };
-
 
 let weekDays = getWeekDays('en-En')
 
@@ -136,10 +143,6 @@ function getWeekDays(locale) {
 }
 
 
-// console.log(weekDays)
-
-
-
 function getDayName(dateStr, locale) {
   var date = new Date(dateStr);
   return date.toLocaleDateString(locale, {
@@ -147,14 +150,8 @@ function getDayName(dateStr, locale) {
   });
 }
 
-
-
-
-
-
 const monthTemplate = querySelectorElement(".monthTemplate").content;
 const calendar = querySelectorElement(".calendar");
-
 
 function getDaysCount() {
   const daysArr = [];
@@ -165,10 +162,10 @@ function getDaysCount() {
   return daysArr
 }
 
+
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const numberCheck = (dayNumber) => {
   if (dayNumber <= 9) {
-    console.log(true);
     return `0${dayNumber}`;
   } else {
     return dayNumber;
@@ -186,7 +183,7 @@ daysArr.forEach(d => {
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
     const day = document.createElement("div");
     day.classList.add("day");
-    day.textContent = dayNumber;;
+    day.textContent = dayNumber;
     let dateStr = `${monthNumber}/${numberCheck(dayNumber)}/2019`;
     const notShowDate = document.createElement("div")
     notShowDate.classList.add("notShowDate")
