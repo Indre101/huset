@@ -4,23 +4,26 @@ const logInBtn = querySelectorElement(".logInBtn");
 const logInPage = getElementByItsID("logInPage");
 const loginMenuItem = querySelectorElement(".menu-item-log-in");
 const closeLogIn = querySelectorElement(".closeLogIn");
+const userPage = querySelectorElement(".userPage");
+const userNameTemplate = querySelectorElement(".userNameTemplate").content;
+// const userIconContainer = querySelectorElement(".userIconContainer");
+
+
 
 fetch(
-  "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
-)
+    "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
+  )
   .then(res => {
     return res.json();
   })
   .then(schedules => {
-    logInBtn.onclick = function() {
+    logInBtn.onclick = function () {
       event.preventDefault();
-      const uniquevolunteers = showVolunteers();
+      const uniquevolunteers = getUniqueVolunteers();
       const userActive = ceckLogInInfo(uniquevolunteers);
-      //
-      console.log(userActive);
-      console.log(volunteerWorkdates);
-
       getTheScheduleOfVolunteer(schedules, userActive);
+      console.log(userActive);
+      assignUserProfileHeadline(userActive)
       activeCalendarDates(volunteerWorkdates, "blue");
       volunteerWorkdates = [];
 
@@ -32,6 +35,19 @@ fetch(
     // schedules.forEach(getTheScheduleOfVolunteer);
   });
 
+function assignUserProfileHeadline(params) {
+  const cln = userNameTemplate.cloneNode(true);
+  cln.querySelector(".userMenuIcon").src = params.imgVolunteer;
+  cln.querySelector(".hello").textContent = `Hi, ${params.name}`
+
+  userPage.prepend(cln.querySelector(".userIconContainer"));
+
+}
+
+
+
+
+
 let volunteerWorkdates = [];
 
 function getTheScheduleOfVolunteer(schedule, volunteerObj) {
@@ -40,32 +56,25 @@ function getTheScheduleOfVolunteer(schedule, volunteerObj) {
       for (var key of Object.keys(ev.volunteer)) {
         if (parseInt(key) == parseInt(volunteerObj.id)) {
           volunteerWorkdates.push(sch);
-
-          // return sch
-          // console.log(ev);
-          // console.log(sch.title.rendered);
         }
-        // const volunteer = new Volunteer(oneEvent.volunteer[key].ID, oneEvent.volunteer[key].post_title, oneEvent.volunteer[key].last_name, "./img/circles.png", oneEvent.volunteer[key].pass)
-        // volunteers.push(volunteer);
       }
     });
   });
 }
 
+
+
 const volunteers = [];
-let filteredCategoriesArray = () =>
-  volunteers.filter(function(item, index) {
-    return volunteers.indexOf(item) >= index;
-  });
 
 function getVolunteeers(schedule) {
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
+      // console.log(oneEvent)
       const volunteer = new Volunteer(
         oneEvent.volunteer[key].ID,
         oneEvent.volunteer[key].post_title,
         oneEvent.volunteer[key].last_name,
-        "./img/circles.png",
+        oneEvent.volunteer[key].volunteer_image.guid,
         oneEvent.volunteer[key].pass
       );
       volunteers.push(volunteer);
@@ -73,16 +82,29 @@ function getVolunteeers(schedule) {
   });
 }
 
+
+const volunteerEvents = querySelectorElement(".volunteerEvents");
+const volunteerEventsContainer = querySelectorElement(".volunteerEventsContainer");
+const volunteerEventsModalBtn = querySelectorElement(".volunteerEventsModalBtn");
+
 function activeCalendarDates(schedules, color) {
   let datesNotDisplayed = getDisplayNoneDateFields();
   schedules.forEach(schedule => {
     datesNotDisplayed.forEach(dat => {
       if (dat.textContent === schedule.title.rendered) {
         dat.parentElement.style.backgroundColor = color;
+        dat.parentElement.onclick = function () {
+          schedule.event_name.forEach(r => {
+            appendEvents(r, schedule, volunteerEvents, volunteerEvents)
+          })
+
+        }
       }
     });
   });
 }
+
+
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
 
@@ -94,7 +116,7 @@ function Volunteer(id, name, lastName, imgVolunteer, psw) {
   this.psw = psw;
 }
 
-function showVolunteers() {
+function getUniqueVolunteers() {
   return Array.from(new Set(volunteers.map(a => a.id))).map(id => {
     return volunteers.find(a => a.id === id);
   });
@@ -105,20 +127,21 @@ const displayBlock = "d-block";
 const ceckLogInInfo = arr => {
   return arr.find(
     volunteer =>
-      volunteer.name.toLowerCase() == userNameInput.value.toLowerCase() &&
-      volunteer.psw.toLowerCase() == userPswInput.value.toLowerCase()
+    volunteer.name.toLowerCase() == userNameInput.value.toLowerCase() &&
+    volunteer.psw.toLowerCase() == userPswInput.value.toLowerCase()
   );
 };
 
-loginMenuItem.onclick = function() {
+loginMenuItem.onclick = function () {
   toggleBetweenTwoClasses(logInPage, displayNoneClass, displayBlock);
 };
-closeLogIn.onclick = function() {
+closeLogIn.onclick = function () {
+  event.preventDefault();
   toggleBetweenTwoClasses(logInPage, displayBlock, displayNoneClass);
 };
 
 // CREATING CALENDAR
-let getDaysInMonth = function(month, year) {
+let getDaysInMonth = function (month, year) {
   // Here January is 1 based
   //Day 0 is the last day in the previous month
   return new Date(year, month, 0).getDate();

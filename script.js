@@ -54,39 +54,47 @@ function compare(a, b) {
 
 
 function showData(item) {
-
   item.event_name.forEach(event => {
-    // console.log(event);
-    const cln = eventTemplate.cloneNode(true);
-    const eventCard = cln.querySelector(".event");
-    cln.querySelector(".eventName").textContent = event.event_name;
-    cln.querySelector(".date").textContent = item.event_date;
-    cln.querySelector(".eventImg").src = event.image.guid
-    cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
-    cln.querySelector(".price").textContent = event.price;
-    cln.querySelector(".description").textContent = event.post_content;
-    event.category.forEach(category => {
-      let list = document.createElement("h3");
-      list.textContent = category.name;
-      cln.querySelector(".categories").appendChild(list);
-      eventCard.classList.add(`${category.name.toLowerCase().split(' ').join('')}`)
-
-    })
-    const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
-    const eventExtrainformation = cln.querySelector(".eventExtrainformation");
-    const eventHeightfitClass = "eventHeightfit";
-    const eventHeightExpand = "eventHeightExpand";
-    eventCard.onclick = function () {
-      toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
-    }
-
-    if (compareDates(item)) {
-      upcomingEvents.appendChild(cln)
-    } else if (!compareDates(item)) {
-      previousEvents.appendChild(cln)
-    }
+    appendEvents(event, item, upcomingEvents, previousEvents)
   })
 }
+
+
+
+const appendEvents = (event, item, firstParent, secondParent) => {
+  console.log("jkhlkæ")
+  const cln = eventTemplate.cloneNode(true);
+  const eventCard = cln.querySelector(".event");
+  cln.querySelector(".eventName").textContent = event.event_name;
+  cln.querySelector(".date").textContent = item.event_date;
+  cln.querySelector(".eventImg").src = event.image.guid
+  cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
+  cln.querySelector(".price").textContent = event.price;
+  cln.querySelector(".description").textContent = event.post_content;
+  event.category.forEach(category => {
+    let list = document.createElement("h3");
+    list.textContent = category.name;
+    cln.querySelector(".categories").appendChild(list);
+    eventCard.classList.add(`${category.name.toLowerCase().split(' ').join('')}`)
+
+  })
+  const eventExtrainformationContainer = cln.querySelector(".eventExtrainformationContainer");
+  const eventExtrainformation = cln.querySelector(".eventExtrainformation");
+  const eventHeightfitClass = "eventHeightfit";
+  const eventHeightExpand = "eventHeightExpand";
+  eventCard.onclick = function () {
+    toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
+  }
+
+  if (compareDates(item)) {
+    firstParent.appendChild(cln)
+  } else if (!compareDates(item)) {
+    secondParent.appendChild(cln)
+  }
+
+}
+
+
 
 const getCurrentDate = () => new Date().getTime();
 const currentDate = getCurrentDate();
