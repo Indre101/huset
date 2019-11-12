@@ -318,16 +318,16 @@ textarea.input {
 
 .eventInfoContainer {
   padding: 0.5rem;
+  grid-area: 2/1/ span 1/ span 1;
 }
 
 .event {
-  grid-template-columns: repeat(2, 1fr);
-  /* display: grid; */
+  grid-template-columns: 1fr;
+  grid-template-rows: Repeat(2, 180px);
   grid-gap: 0 1rem;
   margin: 1rem;
   background-color: black;
   margin: 50px 0.5rem 130px 0.5rem;
-  will-change: max-height;
 }
 
 
