@@ -5,7 +5,19 @@
 
 
 :root {
-  --primary-color: black;
+  --dark-blue: rgb(36, 25, 93);
+  --dark-green: rgb(0, 89, 36);
+  --dark-red: rgb(211, 7, 42);
+  --ligh-blue: rgb(233, 242, 253);
+  --ligh-green: rgb(226, 238, 216);
+  --ligh-pink: rgb(252, 229, 241);
+  --light-grey: rgb(157, 157, 156);
+
+
+
+
+
+
   --secondary-color: #D3072A;
 }
 
@@ -605,8 +617,11 @@ input[type=date] {
 }
 
 .userMenuIcon {
-  padding: 1rem 0 0 1rem;
-  height: 9rem;
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
 }
 
 
@@ -645,4 +660,10 @@ input[type=date] {
   flex-wrap: wrap;
   flex-direction: row;
   width: 100vw;
+}
+
+
+.volunteerEvents {
+  height: 100vh;
+  color: white;
 }
