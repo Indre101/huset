@@ -54,12 +54,15 @@ function compare(a, b) {
 
 
 function showData(item) {
+
   item.event_name.forEach(event => {
+    console.log(event);
+
     const cln = eventTemplate.cloneNode(true);
     const eventCard = cln.querySelector(".event");
     cln.querySelector(".eventName").textContent = event.event_name;
     cln.querySelector(".date").textContent = item.event_date;
-    // cln.querySelector(".eventImg").src = event._embedded["wp:featuredmedia"][0].href;
+    cln.querySelector(".eventImg").src = event.image.guid
     cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
     cln.querySelector(".price").textContent = event.price;
     cln.querySelector(".description").textContent = event.post_content;
@@ -133,7 +136,6 @@ function getEventsThatHaveTheClass(eventsArr, inputsArr, class1, class2) {
         eventsArr[i].classList.remove(class1)
         eventsArr[i].classList.add(class2)
         filterByDate(eventsArr[i])
-        console.log(eventsArr[i]);
       }
     }
   }

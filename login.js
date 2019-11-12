@@ -37,15 +37,18 @@ function getSchedules(schedule) {
 
 
 function activeCalendarDates(schedules) {
+  // console.log(schedules)
 
   let datesNotDisplayed = getDisplayNoneDateFields()
-
+  // console.log(datesNotDisplayed)
   schedules.forEach(schedule => {
+    // console.log("schedule" + schedule.title.rendered)
 
     datesNotDisplayed.forEach(dat => {
+      // console.log(typeOf(dat.textContent))
 
-      if (dat.textContent == schedule.title.rendered) {
-        console.log(schedule.title.rendered)
+      if (dat.textContent === schedule.title.rendered) {
+
         dat.parentElement.style.backgroundColor = "red";
       }
     })
@@ -128,7 +131,7 @@ function getWeekDays(locale) {
 }
 
 
-console.log(weekDays)
+// console.log(weekDays)
 
 
 
