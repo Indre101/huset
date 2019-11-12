@@ -56,8 +56,7 @@ function compare(a, b) {
 function showData(item) {
 
   item.event_name.forEach(event => {
-    console.log(event);
-
+    // console.log(event);
     const cln = eventTemplate.cloneNode(true);
     const eventCard = cln.querySelector(".event");
     cln.querySelector(".eventName").textContent = event.event_name;

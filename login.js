@@ -34,6 +34,9 @@ function getSchedules(schedule) {
 }
 
 
+// if ("01/03/2019" == "01/03/2019") {
+//   console.log(true);
+// }
 
 
 function activeCalendarDates(schedules) {
@@ -42,13 +45,13 @@ function activeCalendarDates(schedules) {
   let datesNotDisplayed = getDisplayNoneDateFields()
   // console.log(datesNotDisplayed)
   schedules.forEach(schedule => {
-    // console.log("schedule" + schedule.title.rendered)
+    console.log(typeof (schedule.title.rendered))
 
     datesNotDisplayed.forEach(dat => {
-      // console.log(typeOf(dat.textContent))
+      console.log(typeof (dat.textContent))
 
       if (dat.textContent === schedule.title.rendered) {
-
+        console.log("true")
         dat.parentElement.style.backgroundColor = "red";
       }
     })
@@ -60,10 +63,6 @@ function activeCalendarDates(schedules) {
 }
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate")
-
-
-
-
 
 function Volunteer(id, name, lastName, imgVolunteer, psw) {
   this.id = id;
@@ -94,9 +93,11 @@ logInBtn.onclick = function () {
 
 const displayBlock = "d-block"
 
+
 const ceckLogInInfo = (arr) => {
   return arr.find(volunteer => volunteer.name.toLowerCase() == userNameInput.value.toLowerCase() && volunteer.psw.toLowerCase() == userPswInput.value.toLowerCase())
 }
+
 
 loginMenuItem.onclick = function () {
   toggleBetweenTwoClasses(logInPage, displayNoneClass, displayBlock)
@@ -106,6 +107,10 @@ closeLogIn.onclick = function () {
   toggleBetweenTwoClasses(logInPage, displayBlock, displayNoneClass)
 
 }
+
+
+
+
 
 let getDaysInMonth = function (month, year) {
   // Here January is 1 based
@@ -150,12 +155,6 @@ function getDayName(dateStr, locale) {
 const monthTemplate = querySelectorElement(".monthTemplate").content;
 const calendar = querySelectorElement(".calendar");
 
-// const Dates() {
-//   this.dayNumber = dayNumber,
-//     thhis.
-// }
-
-
 
 function getDaysCount() {
   const daysArr = [];
@@ -166,9 +165,15 @@ function getDaysCount() {
   return daysArr
 }
 
-
-
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const numberCheck = (dayNumber) => {
+  if (dayNumber <= 9) {
+    console.log(true);
+    return `0${dayNumber}`;
+  } else {
+    return dayNumber;
+  }
+}
 
 let monthNumber = 0;
 const daysArr = getDaysCount()
@@ -181,8 +186,8 @@ daysArr.forEach(d => {
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
     const day = document.createElement("div");
     day.classList.add("day");
-    day.textContent = dayNumber;
-    let dateStr = `${monthNumber}/${dayNumber}/2019`;
+    day.textContent = dayNumber;;
+    let dateStr = `${monthNumber}/${numberCheck(dayNumber)}/2019`;
     const notShowDate = document.createElement("div")
     notShowDate.classList.add("notShowDate")
     notShowDate.classList.add("d-none")

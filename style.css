@@ -575,6 +575,18 @@ input[type=date] {
 }
 
 
+
+.closeLogIn {
+  margin: 3rem 0 0 0;
+  height: 50px;
+  width: 240px;
+  border: none;
+  font-size: 2rem;
+  background-color: grey;
+}
+
+
+
 .logInForm img {
   width: 10rem;
   margin: 3rem;
