@@ -607,6 +607,33 @@ label {
   margin-right: 1rem;
 }
 
+
+.filterAnimation {
+  display: flex;
+  animation: showFilters 0.5s linear forwards 1;
+}
+
+
+@keyframes showFilters {
+  0% {
+    transform: translateX(-100vw);
+  }
+}
+
+.filterAnimationTransition {
+  display: flex;
+  animation: hideFilters 0.5s linear forwards 1;
+}
+
+
+@keyframes hideFilters {
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+
+
+
 .aside {
   text-align: center;
   display: grid;

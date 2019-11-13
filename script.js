@@ -42,7 +42,8 @@ const submitBtn = querySelectorElement(".submitBtn");
 const displayFlex = "d-flex"
 
 filterIcon.onclick = function () {
-  toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
+  toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+  // toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
 }
 
 
@@ -131,7 +132,9 @@ let hide = "hide"
 function filterData() {
   const events = querySelectAll(".event");
   submitBtn.onclick = function () {
-    toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
+    toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+
+    // toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
     getCheckedInputs();
 
     if (checkedInputs.length === 0) {
