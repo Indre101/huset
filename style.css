@@ -474,11 +474,17 @@ textarea.input {
 
 .event {
   grid-template-columns: 1fr;
-  grid-template-rows: 160px auto;
+  grid-template-rows: 180px auto;
   margin: 1rem;
   background-color: black;
   margin: 0 0.5rem 80px 0.5rem;
 }
+
+
+.event a {
+  margin-top: auto;
+}
+
 
 .doorsOpen,
 .eventHours,
@@ -519,10 +525,10 @@ textarea.input {
 
 
 .eventImg {
-  object-fit: cover;
   height: 100%;
   width: 100%;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .volunteerBtn {
@@ -532,7 +538,7 @@ textarea.input {
   height: 3rem;
   font-size: 1.5rem;
   padding: 0.5rem 0;
-  margin-top: auto;
+  width: 100%;
   box-shadow: inset 10px -17px 25px rgba(13, 31, 20, 0.72);
 }
 
