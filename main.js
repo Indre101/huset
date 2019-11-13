@@ -4,9 +4,24 @@ const querySelectAll = (argument) => document.querySelectorAll(argument);
 
 const toggleBetweenTwoClasses = (element, classNameToRemove, classNameToAdd) => {
   element.classList.toggle(classNameToRemove)
-  element.classList.toggle(classNameToAdd)
+  element.classList.toggle(classNameToAdd);
 
 }
+
+const toggleBetweenTwoClassesWithTransition = (element, classNameToRemove, classNameToAdd, transitionClass, timeDelay) => {
+  if (element.classList.contains(classNameToRemove)) {
+    element.classList.remove(classNameToRemove)
+    element.classList.add(classNameToAdd)
+  } else if (element.classList.contains(classNameToAdd)) {
+    element.classList.remove(classNameToAdd)
+    element.classList.add(transitionClass)
+    setTimeout(() => {
+      element.classList.remove(transitionClass);
+      element.classList.add(classNameToRemove)
+    }, timeDelay);
+  }
+}
+
 
 const mbMenuIcon = querySelectorElement(".mb-menu");
 const navigationMenu = querySelectorElement("nav");
@@ -42,9 +57,12 @@ readmore.onclick = function () {
 
 }
 
+
+
 menuItems.forEach(item => {
   item.addEventListener("click", hideMenus)
 })
+
 
 function hideMenus() {
   toggleBetweenTwoClasses(navigationMenu, showMenuClass, displayNoneClass)
@@ -52,12 +70,17 @@ function hideMenus() {
   toggleBetweenTwoClasses(header, "header-menu-opened", "header-menu-closed")
 
 }
+
+
+
 const header = querySelectorElement("header");
+const navigationTransition = "navigationTransition"
+const headerTransition = "headerTransition"
 
 mbMenuIcon.onclick = function () {
   toggleBetweenTwoClasses(mbMenuIcon, menuIconClosed, menuIconOpen)
-  toggleBetweenTwoClasses(navigationMenu, displayNoneClass, showMenuClass)
-  toggleBetweenTwoClasses(header, "header-menu-closed", "header-menu-opened")
+  toggleBetweenTwoClassesWithTransition(navigationMenu, displayNoneClass, showMenuClass, navigationTransition, 500)
+  toggleBetweenTwoClassesWithTransition(header, "header-menu-closed", "header-menu-opened", headerTransition, 500)
 
 }
 
