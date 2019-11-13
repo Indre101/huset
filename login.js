@@ -7,6 +7,7 @@ const closeLogIn = querySelectorElement(".closeLogIn");
 const userPage = querySelectorElement(".userPage");
 const userNameTemplate = querySelectorElement(".userNameTemplate").content;
 // const userIconContainer = querySelectorElement(".userIconContainer");
+const containers = querySelectAll(".containers")
 
 
 
@@ -18,19 +19,31 @@ fetch(
   })
   .then(schedules => {
     logInBtn.onclick = function () {
+
+      containers.forEach(container => {
+        container.classList.add("dissapear");
+        setTimeout(() => {
+          container.style.display = "none";
+        }, 1000);
+      })
+
+
+      // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock)
       event.preventDefault();
       const uniquevolunteers = getUniqueVolunteers();
       const userActive = ceckLogInInfo(uniquevolunteers);
       getTheScheduleOfVolunteer(schedules, userActive);
       console.log(userActive);
+      window.location = "#November"
+
       assignUserProfileHeadline(userActive)
-      activeCalendarDates(volunteerWorkdates, "blue");
+      activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
       volunteerWorkdates = [];
 
       logInPage.style.display = "none";
     };
 
-    activeCalendarDates(schedules, "red");
+    activeCalendarDates(schedules, "rgb(0, 89, 36)");
     schedules.forEach(getVolunteeers);
     // schedules.forEach(getTheScheduleOfVolunteer);
   });
@@ -95,7 +108,8 @@ function activeCalendarDates(schedules, color) {
         dat.parentElement.style.backgroundColor = color;
         dat.parentElement.onclick = function () {
           schedule.event_name.forEach(r => {
-            appendEvents(r, schedule, volunteerEvents, volunteerEvents)
+            appendEvents(r, schedule, volunteerEventsContainer, volunteerEventsContainer)
+            showThatDateEvents()
           })
 
         }
@@ -104,6 +118,12 @@ function activeCalendarDates(schedules, color) {
   });
 }
 
+
+
+function showThatDateEvents() {
+
+  toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
+}
 
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
@@ -212,7 +232,12 @@ daysArr.forEach(d => {
   const clnMonth = monthTemplate.cloneNode(true);
   const days = clnMonth.querySelector(".days");
   const monthName = clnMonth.querySelector(".monthName");
+
   monthName.textContent = months[monthNumber];
+  if (monthName.textContent == "November") {
+    console.log("ture")
+    monthName.setAttribute("id", "November")
+  }
   monthNumber++;
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
     const day = document.createElement("div");

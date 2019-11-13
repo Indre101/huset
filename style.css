@@ -323,17 +323,24 @@ textarea.input {
 .eventInfoContainer {
   padding: 0.5rem;
   grid-area: 2/1/ span 1/ span 1;
+  display: flex;
+  flex-direction: column;
+  height: 270px;
 }
 
 .event {
   grid-template-columns: 1fr;
-  grid-template-rows: Repeat(2, 180px);
-  grid-gap: 0 1rem;
+  grid-template-rows: 160px auto;
   margin: 1rem;
   background-color: black;
   margin: 50px 0.5rem 130px 0.5rem;
 }
 
+.doorsOpen,
+.eventHours,
+.price {
+  text-align: right;
+}
 
 
 .eventExtrainformationContainer {
@@ -375,10 +382,12 @@ textarea.input {
 
 .volunteerBtn {
   color: white;
-  color: white;
   background: cornflowerblue;
   border: none;
-  height: 2rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  margin-top: auto;
 }
 
 
@@ -548,11 +557,6 @@ input[type=date] {
 
 }
 
-@keyframes showLogIn {
-  0% {
-    transform: translateY(100vh);
-  }
-}
 
 
 
@@ -599,8 +603,22 @@ input[type=date] {
 .userPage {
   height: 100vh;
   background: white;
-  /* padding: 1rem; */
+  animation: showLogIn2 2s 1s linear forwards 1;
 }
+
+
+@keyframes showLogIn {
+  0% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes showLogIn2 {
+  0% {
+    transform: translateY(100vh);
+  }
+}
+
 
 .userIconContainer {
   height: 6rem;
@@ -638,6 +656,21 @@ input[type=date] {
   background-color: var(--dark-blue);
   color: white;
   height: fit-content;
+  /* height: 680px; */
+
+}
+
+.dissapear {
+  animation: dissapear 1s linear forwards 1;
+}
+
+
+@keyframes dissapear {
+  100% {
+    opacity: 0;
+  }
+
+
 }
 
 .monthName {
@@ -646,10 +679,10 @@ input[type=date] {
 }
 
 .day {
-  width: 5rem;
+  width: 4.5rem;
   height: 5rem;
   border: 1px solid;
-  margin: 0.2rem;
+  margin: 0.2rem 0;
   font-size: 1rem;
   text-align: center;
   display: flex;
@@ -657,7 +690,7 @@ input[type=date] {
   align-items: center;
   flex-direction: column;
   background-color: rgb(56, 51, 86);
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border: none;
   box-shadow: 10px;
   box-shadow: inset 10px -10px 25px rgba(0, 0, 0, 0.6);
@@ -670,15 +703,33 @@ input[type=date] {
 
 .days {
 
+
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: baseline;
+  height: 650px;
+  /* display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   width: 100vw;
-  justify-content: center;
+  justify-content: center; */
 }
 
 
 .volunteerEvents {
   height: 100vh;
   color: white;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  flex-direction: column;
+  align-items: center;
+}
+
+.volunteerEventsModalBtn {
+  width: 200px;
+  background-color: antiquewhite;
+  font-size: 2rem;
 }

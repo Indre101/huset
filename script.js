@@ -68,8 +68,17 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   cln.querySelector(".eventName").textContent = event.event_name;
   cln.querySelector(".date").textContent = item.event_date;
   cln.querySelector(".eventImg").src = event.image.guid
-  cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/ Doors open ${event.door_opening_time}`
-  cln.querySelector(".price").textContent = event.price;
+  cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/`
+  cln.querySelector(".doorsOpen").textContent = `Doors open ${event.door_opening_time}`
+
+
+  if (event.price == 0) {
+    cln.querySelector(".price").textContent = `FREE`;
+
+  } else {
+    cln.querySelector(".price").textContent = `Price ${event.price},-`;
+
+  }
   cln.querySelector(".description").textContent = event.post_content;
   event.category.forEach(category => {
     let list = document.createElement("h3");
