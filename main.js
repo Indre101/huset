@@ -27,7 +27,7 @@ const mbMenuIcon = querySelectorElement(".mb-menu");
 const navigationMenu = querySelectorElement("nav");
 const menuItems = querySelectAll(".menu-item")
 const readmore = querySelectorElement(".readmore");
-const textAboutHuset = querySelectorElement(".textAboutHuset");
+const textAboutHuset = querySelectorElement(".hideText");
 
 const displayNoneClass = "d-none";
 const showMenuClass = "navigation";
@@ -36,22 +36,23 @@ const menuIconClosed = "menu-icon-closed";
 const menuIconOpen = "menu-icon-open";
 
 
-const textAboutHusetCollapsedClass = "textAboutHusetCollapsed";
-const textAboutHusetExpandedClass = "textAboutHusetExpanded";
-
-
-
-
-
 
 readmore.onclick = function () {
-  toggleBetweenTwoClasses(textAboutHuset, textAboutHusetCollapsedClass, textAboutHusetExpandedClass)
 
+  // toggleBetweenTwoClasses(textAboutHuset, textAboutHusetCollapsedClass, textAboutHusetExpandedClass)
+  textAboutHuset.style.transition = "height 0.5s linear"
+  textAboutHuset.style.height = "fit-content"
+
+
+
+  textAboutHuset.classList.toggle(".anima");
   if (readmore.textContent === "Read Less") {
     readmore.textContent = "Read More"
+    textAboutHuset.style.display = "none"
 
   } else if (readmore.textContent === "Read More") {
     readmore.textContent = "Read Less"
+    textAboutHuset.style.display = "block"
 
   }
 
@@ -94,15 +95,25 @@ const generalVolunteeringInformation = getElementByItsID("generalVolunteeringInf
 const wrapContactClass = "wrap-contact"
 const generalVolunteeringInformationClass = "generalVolunteeringInformation"
 
-aplication.onclick = function () {
-  toggleBetweenTwoClasses(wrapContact, displayNoneClass, wrapContactClass)
-  toggleBetweenTwoClasses(generalVolunteeringInformation, generalVolunteeringInformationClass, displayNoneClass)
 
+aplication.onclick = function () {
+  if (wrapContact.classList.contains(displayNoneClass)) {
+    toggleBetweenTwoClasses(wrapContact, displayNoneClass, wrapContactClass)
+    toggleBetweenTwoClasses(generalVolunteeringInformation, generalVolunteeringInformationClass, displayNoneClass)
+  } else if (wrapContact.classList.contains(wrapContactClass)) {
+    return false
+  }
 }
 
 volunteerMenuInfo.onclick = function () {
-  toggleBetweenTwoClasses(generalVolunteeringInformation, displayNoneClass, generalVolunteeringInformationClass)
-  toggleBetweenTwoClasses(wrapContact, wrapContactClass, displayNoneClass)
+  if (generalVolunteeringInformation.classList.contains(displayNoneClass)) {
+    toggleBetweenTwoClasses(wrapContact, wrapContactClass, displayNoneClass)
+    toggleBetweenTwoClasses(generalVolunteeringInformation, displayNoneClass, generalVolunteeringInformationClass)
+
+  } else if (wrapContact.classList.contains(generalVolunteeringInformationClass)) {
+    return false
+
+  }
 
 }
 
@@ -115,7 +126,7 @@ const dots = querySelectAll(".dot");
 let a = 0
 let scrollCount = 0;
 
-
+const vlunteeringContainer = querySelectorElement(".vlunteeringContainer");
 
 
 
@@ -138,27 +149,27 @@ function moveTextItems() {
 
 
 const movingText = () => setInterval(moveTextItems, 6000);
-movingText()
+movingText();
+
 
 textContainerVolunteering.forEach(textItem => {
-  textItem.addEventListener("click", stopAnimation)
-
+  textItem.addEventListener("onmouseover", stopAnimation)
 })
 
+function stopAnimation() {
+  console.log("klm.,")
+  clearInterval(movingText);
+  setTimeout(() => {
+    console.log("æløæ")
+
+    movingText()
+  }, 10000);
+
+}
 
 function moveText() {
   textContainerVolunteering.forEach(textItem => {
     dots[scrollCount].style.backgroundColor = "white";
     textItem.style.transform = `translateX(-${a}vw)`;
   })
-}
-
-
-
-function stopAnimation() {
-  clearInterval(movingText);
-  setTimeout(() => {
-    movingText()
-  }, 10000);
-
 }

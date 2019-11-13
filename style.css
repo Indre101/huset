@@ -232,7 +232,8 @@ a {
 
 /*About page  */
 .aboutContainer {
-  height: 100vh;
+  height: fit-content;
+  transition: height 1s linear;
 
   color: white;
   background-image: linear-gradient(to right, #131212cc, #060603);
@@ -253,24 +254,34 @@ h1 {
   text-align: center;
 }
 
-.textAboutHuset {
-  transition: height 0.5s linear;
-  height: 100vh;
+.textAboutHuset {}
+
+.hideText {
+  height: 0;
+  display: none;
 
 }
 
-.textAboutHusetCollapsed {
-  height: 265px;
-  overflow: hidden;
+.anima {
+  /* height: 0; */
+  animation: showAllText 1s linear forwards 1;
+  transition: height;
 }
 
-.textAboutHusetExpanded {
-  height: fit-content;
+@keyframes showAllText {
+  100% {
+    height: fit-content;
+  }
 }
+
+
+
+
 
 .readmore {
   margin: 1.5rem 0 5rem 0;
   text-decoration: underline;
+  font-size: 1.25rem;
 
 }
 
