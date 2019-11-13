@@ -42,7 +42,8 @@ const submitBtn = querySelectorElement(".submitBtn");
 const displayFlex = "d-flex"
 
 filterIcon.onclick = function () {
-  toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
+  toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+  // toggleBetweenTwoClasses(filterForm, displayNoneClass, displayFlex);
 }
 
 
@@ -88,7 +89,7 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   const eventExtrainformation = cln.querySelector(".eventExtrainformation");
   const eventHeightfitClass = "eventHeightfit";
   const eventHeightExpand = "eventHeightExpand";
-  eventCard.onclick = function () {
+  cln.querySelector(".eventImg").onclick = function () {
     toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
   }
 
@@ -131,23 +132,29 @@ let hide = "hide"
 function filterData() {
   const events = querySelectAll(".event");
   submitBtn.onclick = function () {
-    toggleBetweenTwoClasses(filterForm, displayFlex, displayNoneClass);
     getCheckedInputs();
+    if (checkedInputs.length === 0 && Date.parse(dateInput1.value) && Date.parse(dateInput2.value)) {
+      checkEventsForJustDate(events)
 
-    if (checkedInputs.length === 0) {
+    } else if (checkedInputs.length === 0) {
       events.forEach(e => {
         e.classList.remove("hide")
         e.classList.add("active")
       })
-
+      toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
     } else if (checkedInputs.length > 0) {
-
       getEventsThatHaveTheClass(events, uncheckedInputs, active, hide)
       getEventsThatHaveTheClass(events, checkedInputs, hide, active)
     }
 
   }
+
+  clearBtn.onclick = function () {
+    clearFilters(events)
+  }
 }
+
+
 
 function getEventsThatHaveTheClass(eventsArr, inputsArr, class1, class2) {
   for (let i = 0; i < eventsArr.length; i++) {
@@ -155,17 +162,23 @@ function getEventsThatHaveTheClass(eventsArr, inputsArr, class1, class2) {
       if (eventsArr[i].classList.contains(inputsArr[j])) {
         eventsArr[i].classList.remove(class1)
         eventsArr[i].classList.add(class2)
-        filterByDate(eventsArr[i])
+        filterByDate(eventsArr[i], "none", "none")
       }
     }
   }
 }
 
+function checkEventsForJustDate(param) {
+
+  for (let i = 0; i < param.length; i++) {
+    filterByDate(param[i], "hide", "active")
+  }
+}
+
 const clearBtn = querySelectorElement(".clear");
-clearBtn.addEventListener("click", clearFilters)
 
 
-function clearFilters() {
+function clearFilters(param) {
   dateInput1.valueAsDate = null
   dateInput2.valueAsDate = null
   checkedInputs = [];
@@ -174,6 +187,15 @@ function clearFilters() {
   inputs.forEach(i => {
     i.checked = false
   })
+
+  param.forEach(e => {
+    e.classList.add("active")
+    e.classList.remove("hide")
+
+  })
+
+  erMessage.classList.remove("d-block")
+  erMessage.classList.add("d-none")
 
 }
 
@@ -185,27 +207,48 @@ const erMessage = querySelectorElement(".error")
 
 
 
-function filterByDate(oneEvent) {
+
+
+
+function filterByDate(oneEvent, classRemove, classAdd) {
+
   erMessage.classList.remove("d-block")
   erMessage.classList.add("d-none")
   const eventElement = new Date(oneEvent.querySelector(".date").textContent).getTime();
   const date1 = new Date(dateInput1.value).getTime();
   const date2 = new Date(dateInput2.value).getTime();
-  if (!date1 || !date2) {
-    return false
-  } else if (date1 > date2) {
-    erMessage.classList.add("d-block")
-    erMessage.classList.remove("d-none")
-    return false
+
+
+
+  if (date1 > date2) {
+    showErrMessage(erMessage)
+    // return false
   } else if ((eventElement < date1) || (eventElement > date2)) {
     oneEvent.classList.remove("active");
     oneEvent.classList.add("hide");
-    return false
+    toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+
+    // return false
   } else if ((eventElement >= date1) && (eventElement <= date2)) {
-    return true
+    toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+    oneEvent.classList.add(classAdd);
+    oneEvent.classList.remove(classRemove);
+
+    // return true
+  } else if (!Date.parse(dateInput1.value) && !Date.parse(dateInput2.value)) {
+    toggleBetweenTwoClassesWithTransition(filterForm, displayNoneClass, "filterAnimation", "filterAnimationTransition", 500)
+    // return false
+  } else if (!Date.parse(dateInput1.value) || !Date.parse(dateInput2.value)) {
+    showErrMessage(erMessage)
+    // return false
   }
 }
 
+
+function showErrMessage(erorMessage) {
+  erorMessage.classList.add("d-block")
+  erorMessage.classList.remove("d-none")
+}
 
 function getCheckedInputs() {
   checkedInputs = [];
