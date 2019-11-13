@@ -62,7 +62,6 @@ function showData(item) {
 
 
 const appendEvents = (event, item, firstParent, secondParent) => {
-  console.log("jkhlkæ")
   const cln = eventTemplate.cloneNode(true);
   const eventCard = cln.querySelector(".event");
   cln.querySelector(".eventName").textContent = event.event_name;
@@ -70,8 +69,7 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   cln.querySelector(".eventImg").src = event.image.guid
   cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/`
   cln.querySelector(".doorsOpen").textContent = `Doors open ${event.door_opening_time}`
-
-
+  const volunteerBtn = cln.querySelector(".volunteerBtn")
   if (event.price == 0) {
     cln.querySelector(".price").textContent = `FREE`;
 
@@ -98,6 +96,8 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   if (compareDates(item)) {
     firstParent.appendChild(cln)
   } else if (!compareDates(item)) {
+    eventCard.style.opacity = "0.7";
+    volunteerBtn.style.display = "none";
     secondParent.appendChild(cln)
   }
 

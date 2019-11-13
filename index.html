@@ -112,36 +112,44 @@
     <h1>Volunteering</h1>
 
     <div class="volunteeringInformationMenu">
-      <h3 id="volunteerMenuInfo" class="pointer">General Information</h3>
-      <h3 id="aplication" class="pointer">Aplication</h3>
+      <h3 id="volunteerMenuInfo" class="pointer volunteerMenuitem menuitem">General Information</h3>
+      <h3 id="aplication" class="pointer volunteerMenuitem menuitem">Aplication</h3>
     </div>
 
     <div id="wrap-contact" class="d-none ">
-      <form class="contact-form">
+      <form class=" contact-form">
         <span class="contact-form-title">
           Contact Us
         </span>
         <div class="wrap-input" data-validate="Please enter your name">
-          <input class="input" type="text" name="name" placeholder="Full Name" />
+          <input class="input" type="text" name="name" autocomplete="off" placeholder="Full Name" />
           <span class="focus-input100"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter email: e@a.x">
-          <input class="input" type="text" name="email" placeholder="Email" />
+          <input class="input" type="text" name="email" autocomplete="off" placeholder="Email" />
           <span class="focus-input"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter your message">
-          <textarea class="input" name="message" placeholder="Your Message"></textarea>
+          <textarea class="input" name="message" autocomplete="off" placeholder="Your Message"></textarea>
           <span class="focus-input"></span>
         </div>
-        <div class="container-contact-form-btn">
-          <button class="contact-form-btn">
-            Send Email
-          </button>
+        <div class="thankYouMessage-1 d-none">
+          <h2>Thank You!</h2>
+          <p>We will be contacting you soon. <br>
+            Sincerely,<br>
+            Huset administration
+          </p>
+        </div>
+        <div class="container-contact-form-btn d-flex">
+          <div class="bg-btn"></div>
+          <img class="airplane" src="./icons-logo/airplane-white.svg" alt="">
         </div>
       </form>
+
+
     </div>
 
-    <div id="generalVolunteeringInformation" class="generalVolunteeringInformation ">
+    <div id="generalVolunteeringInformation" class="generalVolunteeringInformation d-flex">
       <div class="informationContainer">
         <article class="textContainerVolunteering textContainerAnimation">
           <h3>General Information</h3>
@@ -199,10 +207,19 @@
   </article>
 
   <div id="events" class="eventsContainer containers">
+    <!-- <div class="bg-second"></div> -->
     <article class="aside">
       <h1>Events</h1>
       <img class="filterIcon" src="./icons-logo/filter.svg" alt="" />
     </article>
+
+
+
+    <div class="volunteeringInformationMenu">
+      <h3 id="eventsMenuUpcominEventsItem" class="pointer eventsMenuitem  menuitem">Upcoming Events</h3>
+      <h3 id="eventsMenuPreviousEventsItem" class="pointer eventsMenuitem menuitem">Previous Events</h3>
+    </div>
+
 
     <form class="filter d-none">
       <div class="options">
@@ -233,8 +250,7 @@
       </div>
     </form>
 
-    <article class="events upcomingEvents">
-      <h3>Upcoming Events</h3>
+    <section class="events upcomingEvents d-flex">
       <template class="eventTemplate">
         <section class="event pointer active">
           <img class="eventImg" src="./img/balsalen-1094x705.jpg" alt="" />
@@ -270,25 +286,23 @@
           </article>
         </section>
       </template>
-    </article>
+    </section>
 
-    <article class="events previousEvents">
-      <h3>Previous Events</h3>
-    </article>
+    <section class="events previousEvents d-none">
+    </section>
   </div>
 
   <div id="logInPage" class="logInPage d-none containers">
     <form class="logInForm">
       <img src="./icons-logo/user.svg" alt="">
-      <input class="logInInput userName" type="text" name="username" placeholder="username" autofill="off"
-        autocomplete="off">
+      <input class="logInInput userName" type="text" name="username" placeholder="username">
       <input class="logInInput userPsw" type="password" name="password" placeholder="password">
       <input class="logInBtn logInBtn-bg" type="submit" value="Login">
       <button class="closeLogIn" type="submit" value="Return">Return</button>
     </form>
   </div>
 
-  <div class="userPage ">
+  <div class="userPage d-none">
     <!-- <template> -->
     <template class="userNameTemplate">
 
