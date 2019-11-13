@@ -66,7 +66,6 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   const eventCard = cln.querySelector(".event");
   cln.querySelector(".eventName").textContent = event.event_name;
   cln.querySelector(".date").textContent = item.event_date;
-  cln.querySelector(".eventImg").src = event.image.guid
   cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/`
   cln.querySelector(".doorsOpen").textContent = `Doors open ${event.door_opening_time}`
   const volunteerBtn = cln.querySelector(".volunteerBtn")
@@ -94,8 +93,13 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   }
 
   if (compareDates(item)) {
+    cln.querySelector(".eventImg").style.backgroundImage = `url(${event.image.guid})`;
     firstParent.appendChild(cln)
   } else if (!compareDates(item)) {
+
+
+    cln.querySelector(".eventImg").style.backgroundImage = `linear-gradient(to bottom, #07081399, #000000), url(${event.image.guid})`;
+
     eventCard.style.opacity = "0.7";
     volunteerBtn.style.display = "none";
     secondParent.appendChild(cln)
