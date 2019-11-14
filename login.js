@@ -57,7 +57,7 @@ function displayOrNotTheNotUserContainers(
 
 function assignUserProfileHeadline(params) {
   querySelectorElement(".userMenuIcon").src = params.imgVolunteer;
-  querySelectorElement(".hello").textContent = `Hi, ${params.name}`;
+  querySelectorElement(".hello").textContent = `Hi ${params.name},`;
   querySelectorElement(".logOut").onclick = function () {
     displayOrNotTheNotUserContainers(displayFlex, displayNoneClass, "dissapear");
     userPage.classList.add(displayNoneClass);
