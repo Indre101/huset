@@ -1037,7 +1037,7 @@ input[type=date] {
 @keyframes userMenutransition {
 
   100% {
-    transform: translateX(100vw);
+    transform: translateX(-100vw);
   }
 }
 
