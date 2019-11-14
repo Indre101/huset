@@ -23,6 +23,47 @@
 
 }
 
+
+#spinner {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  background-color: white;
+  z-index: 12;
+}
+
+#spinner:not([hidden]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spinner::after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #f25a41;
+  border-radius: 100%;
+  will-change: transform;
+  animation: spin 1s infinite linear
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 iframe {
   border: none;
 }
@@ -53,6 +94,9 @@ header {
   z-index: 10;
 }
 
+.d-grid {
+  display: grid;
+}
 
 .header-menu-closed {
   position: fixed;
@@ -217,10 +261,8 @@ a {
 .aboutContainer {
   height: fit-content;
   transition: height 1s linear;
-
   color: white;
   background-image: linear-gradient(to right, #131212cc, #060603);
-  display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
@@ -273,7 +315,6 @@ h1 {
 
 .vlunteeringContainer {
   height: 100vh;
-  display: flex;
   flex-direction: column;
   padding: 1rem;
   background-color: #24195dc9;
@@ -455,6 +496,7 @@ textarea.input {
 .eventsContainer {
   color: white;
   background-color: #000000b0;
+  flex-direction: column;
   /* padding: 1rem; */
 }
 
@@ -723,8 +765,9 @@ input[type=date] {
 
 
 .logInForm {
+  z-index: 10;
   height: 100vh;
-  background-color: #5f9ea0c7;
+  background-color: #000000db;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -733,6 +776,15 @@ input[type=date] {
   top: 0;
   width: 100%;
   animation: showLogIn 0.5s linear 1 forwards;
+
+}
+
+.errMessageLogin {
+  width: 240px;
+  padding: 0.4rem;
+  background-color: dark-red;
+  background-color: white;
+  color: red;
 
 }
 
@@ -750,10 +802,12 @@ input[type=date] {
   margin: 1rem;
   font-size: 1.3rem;
   border: none;
+  padding: 1rem;
 }
 
 .logInForm input[type=submit] {
-  background: green;
+  background: var(--dark-green);
+  color: white;
   margin: 3rem 0 0 0;
   height: 50px;
   width: 240px;
@@ -769,14 +823,24 @@ input[type=date] {
   width: 240px;
   border: none;
   font-size: 2rem;
-  background-color: grey;
+  background-color: var(--dark-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 
+.logInForm .closeLogIn img {
+  width: 2rem;
+  margin: 0;
+}
 
 .logInForm img {
   width: 10rem;
   margin: 3rem;
+  filter: grayscale(1);
+
 }
 
 .userPage {
@@ -902,17 +966,35 @@ input[type=date] {
 
 
 .volunteerEvents {
-  height: 100vh;
+  min-height: 100vh;
   color: white;
   position: absolute;
   top: 0;
-  background-color: white;
+  background-color: rgb(35, 25, 93);
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
+
 }
 
+
+
 .volunteerEventsModalBtn {
-  width: 200px;
-  background-color: antiquewhite;
-  font-size: 2rem;
+  width: 100%;
+  background-color: var(--dark-red);
+  position: fixed;
+  bottom: 0;
+}
+
+.volunteerEventsModalBtn img {
+  width: 4rem;
+}
+
+.logOut {
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.logOut img {
+  width: 4rem;
 }

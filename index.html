@@ -31,7 +31,8 @@
 </head>
 
 <body>
-  <main class="container containers">
+  <div hidden id="spinner"></div>
+  <main class="container containers d-flex">
     <div class="bg-image"></div>
     <img class="logo" src="./icons-logo/logo-white.png" alt="Logo of the huset" />
     <header class="header-menu-closed">
@@ -58,7 +59,7 @@
       <div class="mb-menu menu-icon-closed pointer"></div>
     </header>
   </main>
-  <article id="about" class="aboutContainer containers">
+  <article id="about" class="aboutContainer containers d-flex">
     <h1>About Huset</h1>
 
     <!-- <iframe class="videoAboutHuset" src="https://www.youtube.com/embed/F0-se-Z_bak"
@@ -108,7 +109,7 @@
     </aside>
   </article>
 
-  <article id="volunteering" class="vlunteeringContainer containers">
+  <article id="volunteering" class="vlunteeringContainer containers d-flex">
     <h1>Volunteering</h1>
 
     <div class="volunteeringInformationMenu">
@@ -122,11 +123,12 @@
           Contact Us
         </span>
         <div class="wrap-input" data-validate="Please enter your name">
-          <input class="input" type="text" name="name" autocomplete="off" placeholder="Full Name" />
+          <input class="input" data-lpignore="true" type="text" name="name" autocomplete="off"
+            placeholder="Full Name" />
           <span class="focus-input100"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter email: e@a.x">
-          <input class="input" type="text" name="email" autocomplete="off" placeholder="Email" />
+          <input class="input" data-lpignore="true" type="text" name="email" autocomplete="off" placeholder="Email" />
           <span class="focus-input"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter your message">
@@ -206,7 +208,7 @@
 
   </article>
 
-  <div id="events" class="eventsContainer containers">
+  <div id="events" class="eventsContainer containers d-flex">
     <!-- <div class="bg-second"></div> -->
     <article class="aside">
       <h1>Events</h1>
@@ -298,23 +300,25 @@
   <div id="logInPage" class="logInPage d-none containers">
     <form class="logInForm">
       <img src="./icons-logo/user.svg" alt="">
-      <input class="logInInput userName" type="text" name="username" placeholder="username">
-      <input class="logInInput userPsw" type="password" name="password" placeholder="password">
+      <div class="errMessageLogin d-none">User name or password is not correct</div>
+
+      <input class="logInInput userName" data-lpignore="true" type="text" name="username" placeholder="username">
+      <input class="logInInput userPsw" data-lpignore="true" type="password" name="password" placeholder="password">
       <input class="logInBtn logInBtn-bg" type="submit" value="Login">
-      <button class="closeLogIn" type="submit" value="Return">Return</button>
+      <button class="closeLogIn" type="submit" value="Return"><img src="./icons-logo/anX.svg" alt=""></button>
     </form>
   </div>
 
   <div class="userPage d-none">
     <!-- <template> -->
-    <template class="userNameTemplate">
+    <!-- <template class="userNameTemplate"> -->
 
-      <div class="userIconContainer">
-        <img class="userMenuIcon" src="/icons-logo/user.svg" alt="">
-        <h3 class="hello">Hi, Olivia</h3>
-
-      </div>
-    </template>
+    <div class="userIconContainer">
+      <img class="userMenuIcon" src="/icons-logo/user.svg" alt="">
+      <h3 class="hello">Hi, Olivia</h3>
+      <button class="logOut"><img src="./icons-logo/exit.svg" alt=""></button>
+    </div>
+    <!-- </template> -->
 
     <div class="information">
       <div class="calendar">
@@ -337,7 +341,7 @@
     <div class="volunteerEventsContainer"></div>
 
 
-    <button class="volunteerEventsModalBtn">Close</button>
+    <button class="volunteerEventsModalBtn"><img src="./icons-logo/anX.svg" alt=""></button>
   </div>
 
 

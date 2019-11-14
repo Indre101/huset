@@ -5,61 +5,72 @@ const logInPage = getElementByItsID("logInPage");
 const loginMenuItem = querySelectorElement(".menu-item-log-in");
 const closeLogIn = querySelectorElement(".closeLogIn");
 const userPage = querySelectorElement(".userPage");
-const userNameTemplate = querySelectorElement(".userNameTemplate").content;
-// const userIconContainer = querySelectorElement(".userIconContainer");
-const containers = querySelectAll(".containers")
-
-
+const containers = querySelectAll(".containers");
+const errMessageLogin = querySelectorElement(".errMessageLogin");
 
 fetch(
     "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
   )
   .then(res => {
+
     return res.json();
   })
   .then(schedules => {
+    clearFields();
     logInBtn.onclick = function () {
-
-      containers.forEach(container => {
-        container.classList.add("dissapear");
-        setTimeout(() => {
-          container.style.display = "none";
-        }, 1000);
-      })
-
-
-      // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock)
       event.preventDefault();
       const uniquevolunteers = getUniqueVolunteers();
       const userActive = ceckLogInInfo(uniquevolunteers);
-      getTheScheduleOfVolunteer(schedules, userActive);
-      console.log(userActive);
-      window.location = "#November"
+      if (!userActive) {
+        errMessageLogin.classList.remove("d-none");
+        // return false
+      } else {
+        displayOrNotTheNotUserContainers(displayNoneClass, displayFlex, "dissapear");
+        getTheScheduleOfVolunteer(schedules, userActive);
+        window.location = "#November";
+        assignUserProfileHeadline(userActive);
+        activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
+        volunteerWorkdates = [];
+        userPage.classList.remove(displayNoneClass);
+        userPage.classList.add(displayBlock);
+      }
 
-      assignUserProfileHeadline(userActive)
-      activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
-      volunteerWorkdates = [];
-
-      logInPage.style.display = "none";
     };
 
     activeCalendarDates(schedules, "rgb(0, 89, 36)");
     schedules.forEach(getVolunteeers);
-    // schedules.forEach(getTheScheduleOfVolunteer);
   });
 
-function assignUserProfileHeadline(params) {
-  const cln = userNameTemplate.cloneNode(true);
-  cln.querySelector(".userMenuIcon").src = params.imgVolunteer;
-  cln.querySelector(".hello").textContent = `Hi, ${params.name}`
+function displayOrNotTheNotUserContainers(
+  displayValue,
+  displayValue2, transitionClass1
+) {
+  containers.forEach(container => {
+    container.classList.add(transitionClass1);
+    container.classList.remove(displayValue2);
+    setTimeout(() => {
+      container.classList.remove(transitionClass1);
+      container.classList.add(displayValue);
+    }, 1000);
+  });
+}
 
-  userPage.prepend(cln.querySelector(".userIconContainer"));
+function assignUserProfileHeadline(params) {
+  querySelectorElement(".userMenuIcon").src = params.imgVolunteer;
+  querySelectorElement(".hello").textContent = `Hi ${params.name},`;
+  querySelectorElement(".logOut").onclick = function () {
+    displayOrNotTheNotUserContainers(displayFlex, displayNoneClass, "dissapear");
+    userPage.classList.add(displayNoneClass);
+    userPage.classList.remove(displayBlock);
+  };
 
 }
 
-
-
-
+function clearFields() {
+  userNameInput.value = "";
+  userPswInput.value = "";
+  errMessageLogin.classList.add("d-none");
+}
 
 let volunteerWorkdates = [];
 
@@ -75,14 +86,11 @@ function getTheScheduleOfVolunteer(schedule, volunteerObj) {
   });
 }
 
-
-
 const volunteers = [];
 
 function getVolunteeers(schedule) {
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
-      // console.log(oneEvent)
       const volunteer = new Volunteer(
         oneEvent.volunteer[key].ID,
         oneEvent.volunteer[key].post_title,
@@ -95,10 +103,14 @@ function getVolunteeers(schedule) {
   });
 }
 
-
 const volunteerEvents = querySelectorElement(".volunteerEvents");
 const volunteerEventsContainer = querySelectorElement(".volunteerEventsContainer");
-const volunteerEventsModalBtn = querySelectorElement(".volunteerEventsModalBtn");
+
+const volunteerEventsModalBtn = querySelectorElement(
+  ".volunteerEventsModalBtn"
+);
+
+
 
 function activeCalendarDates(schedules, color) {
   let datesNotDisplayed = getDisplayNoneDateFields();
@@ -107,12 +119,16 @@ function activeCalendarDates(schedules, color) {
       if (dat.textContent === schedule.title.rendered) {
         dat.parentElement.style.backgroundColor = color;
         dat.parentElement.onclick = function () {
+          toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
           schedule.event_name.forEach(r => {
-            appendEvents(r, schedule, volunteerEventsContainer, volunteerEventsContainer)
-            showThatDateEvents()
-          })
-
-        }
+            appendEvents(
+              r,
+              schedule,
+              volunteerEventsContainer,
+              volunteerEventsContainer
+            );
+          });
+        };
       }
     });
   });
@@ -120,11 +136,13 @@ function activeCalendarDates(schedules, color) {
 
 
 
-function showThatDateEvents() {
+volunteerEventsModalBtn.onclick = function () {
 
-  toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
-}
-
+  while (volunteerEventsContainer.firstChild) {
+    volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
+  }
+  toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
+};
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
 
@@ -153,11 +171,14 @@ const ceckLogInInfo = arr => {
 };
 
 loginMenuItem.onclick = function () {
-  toggleBetweenTwoClasses(logInPage, displayNoneClass, displayBlock);
+  toggleBetweenTwoClasses(logInPage, displayNoneClass, displayFlex);
 };
+
 closeLogIn.onclick = function () {
   event.preventDefault();
-  toggleBetweenTwoClasses(logInPage, displayBlock, displayNoneClass);
+  errMessageLogin.classList.add("d-none");
+  toggleBetweenTwoClasses(logInPage, displayFlex, displayNoneClass);
+  volunteerEventsContainer.innerHTML = "";
 };
 
 // CREATING CALENDAR
@@ -235,8 +256,7 @@ daysArr.forEach(d => {
 
   monthName.textContent = months[monthNumber];
   if (monthName.textContent == "November") {
-    console.log("ture")
-    monthName.setAttribute("id", "November")
+    monthName.setAttribute("id", "November");
   }
   monthNumber++;
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
