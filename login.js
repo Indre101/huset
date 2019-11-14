@@ -7,6 +7,13 @@ const closeLogIn = querySelectorElement(".closeLogIn");
 const userPage = querySelectorElement(".userPage");
 const containers = querySelectAll(".containers");
 const errMessageLogin = querySelectorElement(".errMessageLogin");
+const userIconContainer = querySelectorElement(".userIconContainer");
+const userMenu = querySelectorElement(".userMenu");
+
+userIconContainer.onclick = function () {
+  toggleBetweenTwoClassesWithTransition(userMenu, displayNoneClass, displayBlock, "userMenuTransition", 500)
+
+}
 
 fetch(
     "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"

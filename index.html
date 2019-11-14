@@ -118,17 +118,17 @@
     </div>
 
     <div id="wrap-contact" class="d-none ">
-      <form class=" contact-form">
+      <form class=" contact-form" autocomplete="off">
         <span class="contact-form-title">
           Contact Us
         </span>
         <div class="wrap-input" data-validate="Please enter your name">
-          <input class="input" data-lpignore="true" type="text" name="name" autocomplete="off"
+          <input class="input" data-lpignore="true" type="text" autocomplete="off" name="name"
             placeholder="Full Name" />
           <span class="focus-input100"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter email: e@a.x">
-          <input class="input" data-lpignore="true" type="text" name="email" autocomplete="off" placeholder="Email" />
+          <input class="input" data-lpignore="true" type="text" autocomplete="off" name="email" placeholder="Email" />
           <span class="focus-input"></span>
         </div>
         <div class="wrap-input" data-validate="Please enter your message">
@@ -302,8 +302,10 @@
       <img src="./icons-logo/user.svg" alt="">
       <div class="errMessageLogin d-none">User name or password is not correct</div>
 
-      <input class="logInInput userName" data-lpignore="true" type="text" name="username" placeholder="username">
-      <input class="logInInput userPsw" data-lpignore="true" type="password" name="password" placeholder="password">
+      <input class="logInInput userName" data-lpignore="true" type="text" autocomplete="off" name="username"
+        placeholder="username">
+      <input class="logInInput userPsw" data-lpignore="true" type="password" autocomplete="off" name="password"
+        placeholder="password">
       <input class="logInBtn logInBtn-bg" type="submit" value="Login">
       <button class="closeLogIn" type="submit" value="Return"><img src="./icons-logo/anX.svg" alt=""></button>
     </form>
@@ -316,6 +318,13 @@
     <div class="userIconContainer">
       <img class="userMenuIcon" src="/icons-logo/user.svg" alt="">
       <h3 class="hello">Hi, Olivia</h3>
+    </div>
+
+
+    <div class="userMenu d-none">
+      <h3>All Events</h3>
+      <h3>Calendar</h3>
+      <h3>Account Information</h3>
       <button class="logOut"><img src="./icons-logo/exit.svg" alt=""></button>
     </div>
     <!-- </template> -->

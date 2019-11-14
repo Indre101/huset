@@ -12,6 +12,7 @@
   --ligh-green: rgb(226, 238, 216);
   --ligh-pink: rgb(252, 229, 241);
   --light-grey: rgb(157, 157, 156);
+  --height-moobile: 700px;
 }
 
 * {
@@ -845,7 +846,7 @@ input[type=date] {
 
 .userPage {
   height: 100vh;
-  background: white;
+  background-color: #00000085;
   animation: showLogIn2 2s 1s linear forwards 1;
 }
 
@@ -869,6 +870,8 @@ input[type=date] {
   justify-content: flex-start;
   align-items: flex-end;
   border-bottom: 3px solid black;
+  background-image: linear-gradient(360deg, black, #ffffff00);
+  color: white;
 }
 
 .userMenuIcon {
@@ -887,7 +890,7 @@ input[type=date] {
   /* margin: 3rem 0; */
   flex-direction: row;
   width: 100%;
-
+  height: 700px;
   /* height: 550px; */
   overflow: scroll;
 }
@@ -970,11 +973,11 @@ input[type=date] {
   color: white;
   position: absolute;
   top: 0;
-  background-color: rgb(35, 25, 93);
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-
+  background-color: rgb(35, 25, 93);
+  background-image: linear-gradient(45deg, black, transparent);
 }
 
 
@@ -997,4 +1000,46 @@ input[type=date] {
 
 .logOut img {
   width: 4rem;
+  margin: 1rem;
+}
+
+
+.userMenu {
+  width: 70%;
+  height: 100vh;
+  position: absolute;
+  background-color: white;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  background-color: #222035;
+  background-color: bla;
+  color: white;
+  box-shadow: inset 10px 10px 10px black;
+  height: 700px;
+  animation: showUserMenu 0.5s ease-in-out forwards 1;
+}
+
+@keyframes showUserMenu {
+  0% {
+    transform: translateX(-100vw);
+  }
+}
+
+
+
+.userMenuTransition {
+  animation: userMenutransition 0.5s ease-in-out forwards 1;
+
+}
+
+@keyframes userMenutransition {
+
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+.userMenu h3 {
+  padding: 1rem;
+  border-bottom: 2px solid white;
 }
