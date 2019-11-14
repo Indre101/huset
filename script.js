@@ -17,12 +17,12 @@ function init() {
   }).then(data => {
     data.forEach(cerateCategories)
   })
+
+
   fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
     return res.json()
   }).then(data => {
-
     spinner.setAttribute('hidden', '');
-
     data.sort(compare);
     data.forEach(showData)
   }).then(filterData)

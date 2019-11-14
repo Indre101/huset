@@ -982,14 +982,16 @@ input[type=date] {
 
 
 
-.volunteerEventsModalBtn {
+.volunteerEventsModalBtn,
+.allEventsClosetn {
   width: 100%;
   background-color: var(--dark-red);
   position: fixed;
   bottom: 0;
 }
 
-.volunteerEventsModalBtn img {
+.volunteerEventsModalBtn img,
+.allEventsClosetn img {
   width: 4rem;
 }
 
@@ -1042,4 +1044,18 @@ input[type=date] {
 .userMenu h3 {
   padding: 1rem;
   border-bottom: 2px solid white;
+}
+
+
+.d-flex-absolute {
+  display: flex;
+  position: absolute;
+  background-color: #0a1629;
+  animation: showAllEvents 0.5s linear forwards 1;
+}
+
+@keyframes showAllEvents {
+  0% {
+    transform: translateY(100vh);
+  }
 }

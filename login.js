@@ -9,11 +9,23 @@ const containers = querySelectAll(".containers");
 const errMessageLogin = querySelectorElement(".errMessageLogin");
 const userIconContainer = querySelectorElement(".userIconContainer");
 const userMenu = querySelectorElement(".userMenu");
+const userMenuItemAllEvents = querySelectorElement(".userMenuItemAllEvents");
+const eventsContainer = querySelectorElement(".eventsContainer")
+const allEventsClosetn = querySelectorElement(".allEventsClosetn")
+const userPageMenuItem = querySelectAll(".userPageMenuItem");
+console.log(userPageMenuItem)
 
 userIconContainer.onclick = function () {
   toggleBetweenTwoClassesWithTransition(userMenu, displayNoneClass, displayBlock, "userMenuTransition", 500)
-
 }
+
+userPageMenuItem.forEach(menuItem => {
+  menuItem.onclick = function () {
+    toggleBetweenTwoClassesWithTransition(userMenu, displayBlock, displayNoneClass, "userMenuTransition", 500)
+
+  }
+
+})
 
 fetch(
     "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
@@ -142,6 +154,19 @@ function activeCalendarDates(schedules, color) {
 }
 
 
+userMenuItemAllEvents.onclick = function () {
+  // toggleBetweenTwoClasses(userPage, displayBlock, displayNoneClass);
+  toggleBetweenTwoClasses(eventsContainer, displayNoneClass, "d-flex-absolute");
+  toggleBetweenTwoClasses(allEventsClosetn, displayNoneClass, displayBlock);
+  toggleBetweenTwoClassesWithTransition(userMenu, displayBlock, displayNoneClass, "userMenuTransition", 500)
+
+}
+
+allEventsClosetn.onclick = function () {
+  // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock);
+  toggleBetweenTwoClasses(eventsContainer, "d-flex-absolute", displayNoneClass);
+  toggleBetweenTwoClasses(allEventsClosetn, displayBlock, displayNoneClass);
+}
 
 volunteerEventsModalBtn.onclick = function () {
 
