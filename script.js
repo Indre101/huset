@@ -206,10 +206,6 @@ const dates = querySelectAll(".date")
 const erMessage = querySelectorElement(".error")
 
 
-
-
-
-
 function filterByDate(oneEvent, classRemove, classAdd) {
 
   erMessage.classList.remove("d-block")

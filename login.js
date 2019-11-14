@@ -7,40 +7,48 @@ const closeLogIn = querySelectorElement(".closeLogIn");
 const userPage = querySelectorElement(".userPage");
 const userNameTemplate = querySelectorElement(".userNameTemplate").content;
 // const userIconContainer = querySelectorElement(".userIconContainer");
-const containers = querySelectAll(".containers")
-
-
+const containers = querySelectAll(".containers");
+const errMessageLogin = querySelectorElement(".errMessageLogin");
 
 fetch(
-    "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
-  )
+  "https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100"
+)
   .then(res => {
     return res.json();
   })
   .then(schedules => {
-    logInBtn.onclick = function () {
+    console.log(logInBtn);
 
-      containers.forEach(container => {
-        container.classList.add("dissapear");
-        setTimeout(() => {
-          container.style.display = "none";
-        }, 1000);
-      })
-
-
-      // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock)
+    clearFields();
+    logInBtn.onclick = function() {
+      console.log("kljæ");
       event.preventDefault();
       const uniquevolunteers = getUniqueVolunteers();
       const userActive = ceckLogInInfo(uniquevolunteers);
-      getTheScheduleOfVolunteer(schedules, userActive);
       console.log(userActive);
-      window.location = "#November"
+      console.log(userActive);
 
-      assignUserProfileHeadline(userActive)
-      activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
-      volunteerWorkdates = [];
+      if (!userActive) {
+        console.log("true");
+        errMessageLogin.classList.remove("d-none");
+        // return false
+      } else {
+        containers.forEach(container => {
+          container.classList.add("dissapear");
+          setTimeout(() => {
+            container.style.display = "none";
+          }, 1000);
+        });
+        getTheScheduleOfVolunteer(schedules, userActive);
+        console.log(userActive);
+        window.location = "#November";
+        assignUserProfileHeadline(userActive);
+        activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
+        volunteerWorkdates = [];
+        logInPage.style.display = "none";
+      }
 
-      logInPage.style.display = "none";
+      // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock)
     };
 
     activeCalendarDates(schedules, "rgb(0, 89, 36)");
@@ -51,15 +59,16 @@ fetch(
 function assignUserProfileHeadline(params) {
   const cln = userNameTemplate.cloneNode(true);
   cln.querySelector(".userMenuIcon").src = params.imgVolunteer;
-  cln.querySelector(".hello").textContent = `Hi, ${params.name}`
+  cln.querySelector(".hello").textContent = `Hi, ${params.name}`;
 
   userPage.prepend(cln.querySelector(".userIconContainer"));
-
 }
 
-
-
-
+function clearFields() {
+  userNameInput.value = "";
+  userPswInput.value = "";
+  errMessageLogin.classList.add("d-none");
+}
 
 let volunteerWorkdates = [];
 
@@ -74,8 +83,6 @@ function getTheScheduleOfVolunteer(schedule, volunteerObj) {
     });
   });
 }
-
-
 
 const volunteers = [];
 
@@ -95,10 +102,13 @@ function getVolunteeers(schedule) {
   });
 }
 
-
 const volunteerEvents = querySelectorElement(".volunteerEvents");
-const volunteerEventsContainer = querySelectorElement(".volunteerEventsContainer");
-const volunteerEventsModalBtn = querySelectorElement(".volunteerEventsModalBtn");
+const volunteerEventsContainer = querySelectorElement(
+  ".volunteerEventsContainer"
+);
+const volunteerEventsModalBtn = querySelectorElement(
+  ".volunteerEventsModalBtn"
+);
 
 function activeCalendarDates(schedules, color) {
   let datesNotDisplayed = getDisplayNoneDateFields();
@@ -106,25 +116,25 @@ function activeCalendarDates(schedules, color) {
     datesNotDisplayed.forEach(dat => {
       if (dat.textContent === schedule.title.rendered) {
         dat.parentElement.style.backgroundColor = color;
-        dat.parentElement.onclick = function () {
+        dat.parentElement.onclick = function() {
           schedule.event_name.forEach(r => {
-            appendEvents(r, schedule, volunteerEventsContainer, volunteerEventsContainer)
-            showThatDateEvents()
-          })
-
-        }
+            appendEvents(
+              r,
+              schedule,
+              volunteerEventsContainer,
+              volunteerEventsContainer
+            );
+            showThatDateEvents();
+          });
+        };
       }
     });
   });
 }
 
-
-
 function showThatDateEvents() {
-
   toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
 }
-
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
 
@@ -147,21 +157,22 @@ const displayBlock = "d-block";
 const ceckLogInInfo = arr => {
   return arr.find(
     volunteer =>
-    volunteer.name.toLowerCase() == userNameInput.value.toLowerCase() &&
-    volunteer.psw.toLowerCase() == userPswInput.value.toLowerCase()
+      volunteer.name.toLowerCase() == userNameInput.value.toLowerCase() &&
+      volunteer.psw.toLowerCase() == userPswInput.value.toLowerCase()
   );
 };
 
-loginMenuItem.onclick = function () {
+loginMenuItem.onclick = function() {
   toggleBetweenTwoClasses(logInPage, displayNoneClass, displayBlock);
 };
-closeLogIn.onclick = function () {
+closeLogIn.onclick = function() {
   event.preventDefault();
+  errMessageLogin.classList.add("d-none");
   toggleBetweenTwoClasses(logInPage, displayBlock, displayNoneClass);
 };
 
 // CREATING CALENDAR
-let getDaysInMonth = function (month, year) {
+let getDaysInMonth = function(month, year) {
   // Here January is 1 based
   //Day 0 is the last day in the previous month
   return new Date(year, month, 0).getDate();
@@ -235,8 +246,7 @@ daysArr.forEach(d => {
 
   monthName.textContent = months[monthNumber];
   if (monthName.textContent == "November") {
-    console.log("ture")
-    monthName.setAttribute("id", "November")
+    monthName.setAttribute("id", "November");
   }
   monthNumber++;
   for (let dayNumber = 1; dayNumber <= d; dayNumber++) {
