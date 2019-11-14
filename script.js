@@ -1,14 +1,33 @@
+window.addEventListener("DOMContentLoaded", init)
+
+
 const eventTemplate = querySelectorElement(".eventTemplate").content;
 const upcomingEvents = querySelectorElement(".upcomingEvents");
 const previousEvents = querySelectorElement(".previousEvents");
 const inputTemplate = querySelectorElement(".inputTemplate").content
+const spinner = document.getElementById("spinner");
 
 
-fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/categories").then(res => {
-  return res.json()
-}).then(data => {
-  data.forEach(cerateCategories)
-})
+function init() {
+
+  spinner.removeAttribute('hidden');
+
+  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/categories").then(res => {
+    return res.json()
+  }).then(data => {
+    data.forEach(cerateCategories)
+  })
+  fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
+    return res.json()
+  }).then(data => {
+    spinner.setAttribute('hidden', '');
+
+    data.sort(compare);
+    data.forEach(showData)
+  }).then(filterData)
+
+}
+
 
 const cerateCategories = (cat) => {
   if (cat.parent == 0) {
@@ -27,12 +46,7 @@ const cerateCategories = (cat) => {
 }
 
 
-fetch("https://timidesign.org/kea/wordpress-excersize/wordpress/wordpress/wp-json/wp/v2/schedule?_embed&per_page=100").then(res => {
-  return res.json()
-}).then(data => {
-  data.sort(compare);
-  data.forEach(showData)
-}).then(filterData)
+
 
 
 
