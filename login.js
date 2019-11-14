@@ -5,8 +5,6 @@ const logInPage = getElementByItsID("logInPage");
 const loginMenuItem = querySelectorElement(".menu-item-log-in");
 const closeLogIn = querySelectorElement(".closeLogIn");
 const userPage = querySelectorElement(".userPage");
-// const userNameTemplate = querySelectorElement(".userNameTemplate").content;
-// const userIconContainer = querySelectorElement(".userIconContainer");
 const containers = querySelectAll(".containers");
 const errMessageLogin = querySelectorElement(".errMessageLogin");
 
@@ -18,42 +16,29 @@ fetch(
     return res.json();
   })
   .then(schedules => {
-
-    console.log(logInBtn);
     clearFields();
     logInBtn.onclick = function () {
-
-
-      console.log("kljæ");
       event.preventDefault();
       const uniquevolunteers = getUniqueVolunteers();
       const userActive = ceckLogInInfo(uniquevolunteers);
-      console.log(userActive);
-      console.log(userActive);
-
       if (!userActive) {
-        console.log("true");
         errMessageLogin.classList.remove("d-none");
         // return false
       } else {
         displayOrNotTheNotUserContainers(displayNoneClass, displayFlex, "dissapear");
         getTheScheduleOfVolunteer(schedules, userActive);
-        console.log(userActive);
         window.location = "#November";
         assignUserProfileHeadline(userActive);
         activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
         volunteerWorkdates = [];
-        // logInPage.style.display = "none";
         userPage.classList.remove(displayNoneClass);
         userPage.classList.add(displayBlock);
       }
 
-      // toggleBetweenTwoClasses(userPage, displayNoneClass, displayBlock)
     };
 
     activeCalendarDates(schedules, "rgb(0, 89, 36)");
     schedules.forEach(getVolunteeers);
-    // schedules.forEach(getTheScheduleOfVolunteer);
   });
 
 function displayOrNotTheNotUserContainers(
@@ -71,12 +56,9 @@ function displayOrNotTheNotUserContainers(
 }
 
 function assignUserProfileHeadline(params) {
-  // const cln = userNameTemplate.cloneNode(true);
-
   querySelectorElement(".userMenuIcon").src = params.imgVolunteer;
   querySelectorElement(".hello").textContent = `Hi, ${params.name}`;
   querySelectorElement(".logOut").onclick = function () {
-    console.log("clicked")
     displayOrNotTheNotUserContainers(displayFlex, displayNoneClass, "dissapear");
     userPage.classList.add(displayNoneClass);
     userPage.classList.remove(displayBlock);
@@ -109,7 +91,6 @@ const volunteers = [];
 function getVolunteeers(schedule) {
   schedule.event_name.forEach(oneEvent => {
     for (var key of Object.keys(oneEvent.volunteer)) {
-      // console.log(oneEvent)
       const volunteer = new Volunteer(
         oneEvent.volunteer[key].ID,
         oneEvent.volunteer[key].post_title,
@@ -123,9 +104,7 @@ function getVolunteeers(schedule) {
 }
 
 const volunteerEvents = querySelectorElement(".volunteerEvents");
-const volunteerEventsContainer = querySelectorElement(
-  ".volunteerEventsContainer"
-);
+const volunteerEventsContainer = querySelectorElement(".volunteerEventsContainer");
 
 const volunteerEventsModalBtn = querySelectorElement(
   ".volunteerEventsModalBtn"
@@ -140,19 +119,14 @@ function activeCalendarDates(schedules, color) {
       if (dat.textContent === schedule.title.rendered) {
         dat.parentElement.style.backgroundColor = color;
         dat.parentElement.onclick = function () {
-          // spinner.removeAttribute('hidden');
           toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
-
           schedule.event_name.forEach(r => {
-            console.log("called");
             appendEvents(
               r,
               schedule,
               volunteerEventsContainer,
               volunteerEventsContainer
             );
-
-            showThatDateEvents();
           });
         };
       }
@@ -160,11 +134,6 @@ function activeCalendarDates(schedules, color) {
   });
 }
 
-function showThatDateEvents() {
-  // spinner.setAttribute('hidden', '');
-
-  // toggleBetweenTwoClasses(volunteerEvents, displayNoneClass, displayFlex);
-}
 
 
 volunteerEventsModalBtn.onclick = function () {
@@ -172,7 +141,6 @@ volunteerEventsModalBtn.onclick = function () {
   while (volunteerEventsContainer.firstChild) {
     volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
   }
-  // volunteerEventsContainer.innerHTML = ""
   toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
 };
 
