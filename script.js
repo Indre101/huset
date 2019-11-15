@@ -30,6 +30,16 @@ function init() {
 }
 
 
+function compareDates(schedule) {
+  const dateA = new Date(schedule.event_date).getTime()
+  if (dateA >= currentDate) {
+    return true
+  } else if (dateA < currentDate) {
+    return false
+  }
+}
+
+
 const cerateCategories = (cat) => {
   if (cat.parent == 0) {
     return false
@@ -129,14 +139,6 @@ const getCurrentDate = () => new Date().getTime();
 const currentDate = getCurrentDate();
 
 
-function compareDates(schedule) {
-  const dateA = new Date(schedule.event_date).getTime()
-  if (dateA >= currentDate) {
-    return true
-  } else if (dateA < currentDate) {
-    return false
-  }
-}
 
 const options = querySelectorElement(".options");
 let checkedInputs = [];
