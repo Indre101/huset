@@ -222,21 +222,23 @@ let getDaysInMonth = function (month, year) {
   // return new Date(year, month+1, 0).getDate();
 };
 
-let weekDays = getWeekDays("en-En");
+// let weekDays = getWeekDays("en-En");
 
-function getWeekDays(locale) {
-  let baseDate = new Date(Date.UTC(2017, 0, 2)); // just a Monday
-  let weekDays = [];
-  for (i = 0; i < 7; i++) {
-    weekDays.push(
-      baseDate.toLocaleDateString(locale, {
-        weekday: "long"
-      })
-    );
-    baseDate.setDate(baseDate.getDate() + 1);
-  }
-  return weekDays;
-}
+// function getWeekDays(locale) {
+//   let baseDate = new Date(Date.UTC(2017, 0, 2)); // just a Monday
+//   let weekDays = [];
+//   for (i = 0; i < 7; i++) {
+//     weekDays.push(
+//       baseDate.toLocaleDateString(locale, {
+//         weekday: "long"
+//       })
+//     );
+//     baseDate.setDate(baseDate.getDate() + 1);
+//   }
+//   return weekDays;
+// }
+
+
 
 function getDayName(dateStr, locale) {
   var date = new Date(dateStr);
@@ -271,6 +273,8 @@ let months = [
   "November",
   "December"
 ];
+
+
 const numberCheck = dayNumber => {
   if (dayNumber <= 9) {
     return `0${dayNumber}`;

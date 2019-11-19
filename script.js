@@ -81,6 +81,7 @@ function compare(a, b) {
 
 function showData(item) {
   item.event_name.forEach(event => {
+    console.log(event);
     appendEvents(event, item, upcomingEvents, previousEvents)
   })
 }
@@ -95,13 +96,13 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   cln.querySelector(".eventHours").textContent = `Event starts ${event.event_time}/`
   cln.querySelector(".doorsOpen").textContent = `Doors open ${event.door_opening_time}`
   const volunteerBtn = cln.querySelector(".volunteerBtn")
-  if (event.price == 0) {
-    cln.querySelector(".price").textContent = `FREE`;
 
-  } else {
-    cln.querySelector(".price").textContent = `Price ${event.price},-`;
 
+  for (var key of Object.keys(event.venue_name)) {
+    cln.querySelector(".price").textContent = event.venue_name[key].post_title
   }
+
+
   cln.querySelector(".description").textContent = event.post_content;
   event.category.forEach(category => {
     let list = document.createElement("h3");
@@ -230,8 +231,6 @@ function filterByDate(oneEvent, classRemove, classAdd) {
   const eventElement = new Date(oneEvent.querySelector(".date").textContent).getTime();
   const date1 = new Date(dateInput1.value).getTime();
   const date2 = new Date(dateInput2.value).getTime();
-
-
 
   if (date1 > date2) {
     showErrMessage(erMessage)
