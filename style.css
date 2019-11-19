@@ -1059,3 +1059,80 @@ input[type=date] {
     transform: translateY(100vh);
   }
 }
+
+
+/* Iphone 6 /7/8*/
+
+@media only screen and (max-width: 400px) {
+  textarea.input {
+    height: 5rem;
+  }
+
+  .informationContainer {
+    margin-top: 0;
+  }
+
+  .generalVolunteeringInformation {
+    height: 350px;
+  }
+}
+
+
+@media only screen and (max-width: 320px) {
+
+  h1 {
+    padding: 1rem 1rem;
+  }
+
+  textarea.input {
+    height: 4rem;
+  }
+
+  .bg-btn {
+    height: 60px;
+  }
+
+
+  .volunteeringInformationMenu {
+    margin: 1rem 0 2rem 0;
+  }
+
+  label {
+    font-size: 1.5rem;
+  }
+
+
+  .checkboxName {
+    font-size: 1rem;
+  }
+
+  .logInForm img {
+    width: 6rem;
+  }
+
+  .day {
+    width: 3.5rem;
+  }
+}
+
+
+@media only screen and (max-width: 790px) {
+
+  .event {
+    width: 45%;
+
+  }
+
+  .events {
+    justify-content: center;
+  }
+
+
+  label {
+    font-size: 2.4rem;
+  }
+
+  .checkboxName {
+    font-size: 2rem;
+  }
+}
