@@ -158,9 +158,10 @@ function moveTextItems() {
 }
 const movingText = () => setInterval(moveTextItems, 6000);
 movingText();
-textContainerVolunteering.forEach(textItem => {
-  textItem.addEventListener("onmouseover", stopAnimation)
-})
+
+// textContainerVolunteering.forEach(textItem => {
+//   textItem.addEventListener("onmouseover", stopAnimation)
+// })
 
 
 function moveText() {
