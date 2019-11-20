@@ -124,7 +124,11 @@ const appendEvents = (event, item, firstParent, secondParent) => {
 
     volunteerBtn.onclick = function () {
       volunteeringEvents.push(event);
+      volunteerWorkdates.push(item)
+      volunteerBtn.textContent = "Volunteering"
+      volunteerBtn.style.backgroundColor = "rgb(211, 7, 42)";
     }
+
 
     volunteeringEvents.forEach(volunteeringEv => {
       if (volunteeringEv.id == event.id) {

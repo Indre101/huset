@@ -59,6 +59,17 @@ fetch(
 
     activeCalendarDates(schedules, "rgb(0, 89, 36)");
     schedules.forEach(getVolunteeers);
+
+
+    volunteerEventsModalBtn.onclick = function () {
+      activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
+
+      while (volunteerEventsContainer.firstChild) {
+        volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
+      }
+      toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
+    };
+
   });
 
 function displayOrNotTheNotUserContainers(
@@ -173,13 +184,7 @@ allEventsClosetn.onclick = function () {
   toggleBetweenTwoClasses(allEventsClosetn, displayBlock, displayNoneClass);
 }
 
-volunteerEventsModalBtn.onclick = function () {
 
-  while (volunteerEventsContainer.firstChild) {
-    volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
-  }
-  toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
-};
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
 
