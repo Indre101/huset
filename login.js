@@ -47,7 +47,6 @@ fetch(
         getTheScheduleOfVolunteer(schedules, userActive);
         window.location = "#November";
         assignUserProfileHeadline(userActive);
-        console.log(volunteerWorkdates);
 
         activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
         volunteerWorkdates = [];

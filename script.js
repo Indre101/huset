@@ -120,8 +120,6 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   }
 
   if (volunteeringEvents.length != 0) {
-    console.log("volunteeringEvents", volunteeringEvents);
-
     volunteerBtn.onclick = function () {
       volunteeringEvents.push(event);
       volunteerWorkdates.push(item)
