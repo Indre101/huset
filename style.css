@@ -499,6 +499,7 @@ textarea.input {
   background-color: #000000b0;
   flex-direction: column;
   /* padding: 1rem; */
+  min-height: 100vh;
 }
 
 
@@ -998,6 +999,8 @@ input[type=date] {
 .logOut {
   align-self: flex-end;
   margin-left: auto;
+  background-color: #212035;
+  border: none;
 }
 
 .logOut img {
@@ -1068,6 +1071,12 @@ input[type=date] {
     height: 5rem;
   }
 
+  .day {
+    width: 4.5rem;
+    height: 4.5rem;
+
+  }
+
   .informationContainer {
     margin-top: 0;
   }
@@ -1111,16 +1120,24 @@ input[type=date] {
   }
 
   .day {
-    width: 3.5rem;
+    width: 20%;
+    margin: 0;
+  }
+
+  .day p {
+    font-size: 0.5rem;
   }
 }
 
-
-@media only screen and (max-width: 790px) {
+@media only screen and (min-width: 800px) {
 
   .event {
     width: 45%;
 
+  }
+
+  .volunteerEvents {
+    width: 100%;
   }
 
   .events {
@@ -1134,5 +1151,163 @@ input[type=date] {
 
   .checkboxName {
     font-size: 2rem;
+  }
+
+
+  .userIconContainer {
+    height: 10rem;
+  }
+
+  .userMenuIcon {
+    height: 7rem;
+    width: 7rem;
+  }
+
+  .monthName {
+    padding: 2.3rem 0;
+  }
+
+  .calendar {
+    height: fit-content;
+  }
+
+  .day {
+    width: 8.5rem;
+    height: 5rem;
+  }
+
+}
+
+@media only screen and (min-width: 500px) {
+  .event {
+    width: 300px;
+  }
+
+  .events {
+    justify-content: center;
+  }
+
+
+}
+
+
+@media only screen and (min-width: 1025px) {
+
+  label {
+    font-size: 3rem;
+  }
+
+  .checkboxName {
+    font-size: 2.2rem;
+  }
+
+  input[type=date] {
+    height: 4rem;
+    width: 300px;
+  }
+
+
+  .filterBtns {
+    margin: 0 2rem;
+    width: 200px;
+    height: 90px;
+    font-size: 2rem;
+  }
+
+
+
+
+  .day {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .days {
+    height: 700px;
+  }
+
+
+  .calendar {
+    height: fit-content;
+  }
+
+  .monthName {
+    font-size: 2.2rem;
+    padding: 2.5rem;
+
+  }
+
+  .volunteerEvents {
+    width: 100%;
+  }
+
+}
+
+@media only screen and (min-width: 1025px) {
+
+  .calendar {
+    height: fit-content;
+  }
+
+  .volunteerEvents {
+    width: 100%;
+  }
+
+  .day {
+    width: 11rem;
+    height: 6rem;
+  }
+
+  .days {
+    height: 750px;
+    align-items: center;
+  }
+
+  .mb-menu {
+    background-size: contain;
+    width: 9rem;
+    height: 9rem;
+  }
+
+
+  .vlunteeringContainer {
+    height: fit-content;
+    padding: 3rem 10rem;
+  }
+
+
+  .filterBtnsCon {
+    justify-content: center;
+  }
+
+
+
+  .filterBtns {
+    margin: 0 2rem;
+    width: 180px;
+    height: 80px;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+
+
+  .volunteeringInformationMenu {
+    justify-content: center;
+  }
+
+  .menuitem {
+    margin: 0 2rem;
+  }
+
+  .textAboutHusetContainer {
+    padding: 0 300px;
+  }
+
+  .filter {
+    padding: 50px;
   }
 }
