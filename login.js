@@ -13,7 +13,6 @@ const userMenuItemAllEvents = querySelectorElement(".userMenuItemAllEvents");
 const eventsContainer = querySelectorElement(".eventsContainer")
 const allEventsClosetn = querySelectorElement(".allEventsClosetn")
 const userPageMenuItem = querySelectAll(".userPageMenuItem");
-console.log(userPageMenuItem)
 
 userIconContainer.onclick = function () {
   toggleBetweenTwoClassesWithTransition(userMenu, displayNoneClass, displayBlock, "userMenuTransition", 500)
@@ -48,6 +47,8 @@ fetch(
         getTheScheduleOfVolunteer(schedules, userActive);
         window.location = "#November";
         assignUserProfileHeadline(userActive);
+        console.log(volunteerWorkdates);
+
         activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
         volunteerWorkdates = [];
         userPage.classList.remove(displayNoneClass);
@@ -58,6 +59,17 @@ fetch(
 
     activeCalendarDates(schedules, "rgb(0, 89, 36)");
     schedules.forEach(getVolunteeers);
+
+
+    volunteerEventsModalBtn.onclick = function () {
+      activeCalendarDates(volunteerWorkdates, "rgb(211, 7, 42)");
+
+      while (volunteerEventsContainer.firstChild) {
+        volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
+      }
+      toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
+    };
+
   });
 
 function displayOrNotTheNotUserContainers(
@@ -78,6 +90,7 @@ function assignUserProfileHeadline(params) {
   querySelectorElement(".userMenuIcon").src = params.imgVolunteer;
   querySelectorElement(".hello").textContent = params.name;
   querySelectorElement(".logOut").onclick = function () {
+    volunteeringEvents = []
     displayOrNotTheNotUserContainers(displayFlex, displayNoneClass, "dissapear");
     userPage.classList.add(displayNoneClass);
     userPage.classList.remove(displayBlock);
@@ -92,6 +105,7 @@ function clearFields() {
 }
 
 let volunteerWorkdates = [];
+let volunteeringEvents = []
 
 function getTheScheduleOfVolunteer(schedule, volunteerObj) {
   schedule.forEach(sch => {
@@ -99,6 +113,7 @@ function getTheScheduleOfVolunteer(schedule, volunteerObj) {
       for (var key of Object.keys(ev.volunteer)) {
         if (parseInt(key) == parseInt(volunteerObj.id)) {
           volunteerWorkdates.push(sch);
+          volunteeringEvents.push(ev)
         }
       }
     });
@@ -146,6 +161,7 @@ function activeCalendarDates(schedules, color) {
               volunteerEventsContainer,
               volunteerEventsContainer
             );
+
           });
         };
       }
@@ -168,13 +184,7 @@ allEventsClosetn.onclick = function () {
   toggleBetweenTwoClasses(allEventsClosetn, displayBlock, displayNoneClass);
 }
 
-volunteerEventsModalBtn.onclick = function () {
 
-  while (volunteerEventsContainer.firstChild) {
-    volunteerEventsContainer.removeChild(volunteerEventsContainer.firstChild);
-  }
-  toggleBetweenTwoClasses(volunteerEvents, displayFlex, displayNoneClass);
-};
 
 const getDisplayNoneDateFields = () => querySelectAll(".notShowDate");
 

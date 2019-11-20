@@ -81,7 +81,6 @@ function compare(a, b) {
 
 function showData(item) {
   item.event_name.forEach(event => {
-    console.log(event);
     appendEvents(event, item, upcomingEvents, previousEvents)
   })
 }
@@ -89,6 +88,7 @@ function showData(item) {
 
 
 const appendEvents = (event, item, firstParent, secondParent) => {
+
   const cln = eventTemplate.cloneNode(true);
   const eventCard = cln.querySelector(".event");
   cln.querySelector(".eventName").textContent = event.event_name;
@@ -97,10 +97,10 @@ const appendEvents = (event, item, firstParent, secondParent) => {
   cln.querySelector(".doorsOpen").textContent = `Doors open ${event.door_opening_time}`
   const volunteerBtn = cln.querySelector(".volunteerBtn")
 
-
   for (var key of Object.keys(event.venue_name)) {
     cln.querySelector(".price").textContent = event.venue_name[key].post_title
   }
+
 
 
   cln.querySelector(".description").textContent = event.post_content;
@@ -119,9 +119,32 @@ const appendEvents = (event, item, firstParent, secondParent) => {
     toggleBetweenTwoClasses(eventExtrainformation, eventHeightfitClass, eventHeightExpand);
   }
 
+  if (volunteeringEvents.length != 0) {
+    console.log("volunteeringEvents", volunteeringEvents);
+
+    volunteerBtn.onclick = function () {
+      volunteeringEvents.push(event);
+      volunteerWorkdates.push(item)
+      volunteerBtn.textContent = "Volunteering"
+      volunteerBtn.style.backgroundColor = "rgb(211, 7, 42)";
+    }
+
+
+    volunteeringEvents.forEach(volunteeringEv => {
+      if (volunteeringEv.id == event.id) {
+        volunteerBtn.textContent = "Volunteering"
+        volunteerBtn.style.backgroundColor = "rgb(211, 7, 42)";
+      }
+    })
+  }
+
+
+
+
   if (compareDates(item)) {
     cln.querySelector(".eventImg").style.backgroundImage = `url(${event.image.guid})`;
     firstParent.appendChild(cln)
+
   } else if (!compareDates(item)) {
 
 
