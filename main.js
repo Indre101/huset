@@ -162,13 +162,6 @@ textContainerVolunteering.forEach(textItem => {
   textItem.addEventListener("onmouseover", stopAnimation)
 })
 
-function stopAnimation() {
-  clearInterval(movingText);
-  setTimeout(() => {
-    movingText()
-  }, 10000);
-
-}
 
 function moveText() {
   textContainerVolunteering.forEach(textItem => {
@@ -184,9 +177,7 @@ const containerContactFormBtn = querySelectorElement(".container-contact-form-bt
 const airplane = querySelectorElement(".airplane")
 
 containerContactFormBtn.onclick = function () {
-  console.log(thankYouMessage)
   airplane.classList.add("airplane-animation")
-
   setTimeout(() => {
     toggleBetweenTwoClasses(containerContactFormBtn, displayFlex, displayNoneClass);
     toggleBetweenTwoClasses(thankYouMessage, displayNoneClass, "thankYouMessage");

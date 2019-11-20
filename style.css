@@ -366,6 +366,14 @@ form span.contact-form-title {
   height: 80px;
   position: absolute;
   box-shadow: inset 10px -10px 25px black;
+  transition: background-color 0.5s ease-in;
+  transform-origin: center;
+
+
+}
+
+.bg-btn:hover {
+  background-color: rgb(1, 43, 18);
 
 }
 
@@ -655,8 +663,13 @@ label {
   justify-self: flex-end;
   height: 4rem;
   margin-right: 1rem;
+  transition: transform 0.5s ease-in-out;
 }
 
+
+.filterIcon:hover {
+  transform: skewX(20deg);
+}
 
 .filterAnimation {
   display: flex;
@@ -815,7 +828,15 @@ input[type=date] {
   width: 240px;
   border: none;
   font-size: 2rem;
+  transition: background-color 0.5s ease-in-out;
+  cursor: pointer;
 }
+
+.logInForm input[type=submit]:hover {
+  background-color: rgb(5, 53, 36);
+
+}
+
 
 
 
@@ -830,8 +851,13 @@ input[type=date] {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
+.closeLogIn:hover {
+  background-color: rgb(74, 2, 14);
+
+}
 
 .logInForm .closeLogIn img {
   width: 2rem;
@@ -1066,28 +1092,11 @@ input[type=date] {
 
 /* Iphone 6 /7/8*/
 
-@media only screen and (max-width: 400px) {
-  textarea.input {
-    height: 5rem;
-  }
-
-  .day {
-    width: 4.5rem;
-    height: 5rem;
-
-  }
-
-  .informationContainer {
-    margin-top: 0;
-  }
-
-  .generalVolunteeringInformation {
-    height: 350px;
-  }
-}
 
 
-@media only screen and (max-width: 320px) {
+
+@media only screen and (max-width: 376px),
+screen and (min-height:670) {
 
   h1 {
     padding: 1rem 1rem;
@@ -1127,6 +1136,39 @@ input[type=date] {
   .day p {
     font-size: 0.5rem;
   }
+
+  .generalVolunteeringInformation {
+    height: 350px;
+  }
+}
+
+@media only screen and (max-width: 375px),
+screen and (max-height:820px) {
+  textarea.input {
+    height: 5rem;
+  }
+
+  .day {
+    width: 4.5rem;
+    height: 5rem;
+
+  }
+
+  .informationContainer {
+    margin-top: 0;
+  }
+
+  .generalVolunteeringInformation {
+    height: fit-content;
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+  .textContainerVolunteering {
+    width: 500px;
+    margin: 0 auto;
+  }
 }
 
 @media only screen and (min-width: 800px) {
@@ -1135,6 +1177,8 @@ input[type=date] {
     width: 45%;
 
   }
+
+
 
   .volunteerEvents {
     width: 100%;
@@ -1267,18 +1311,19 @@ input[type=date] {
     background-size: contain;
     width: 9rem;
     height: 9rem;
+    transition: transform 1s ease-in-out;
   }
 
 
   .vlunteeringContainer {
     height: fit-content;
-    padding: 3rem 10rem;
   }
 
 
   .filterBtnsCon {
     justify-content: center;
   }
+
 
 
 
@@ -1301,6 +1346,14 @@ input[type=date] {
 
   .menuitem {
     margin: 0 2rem;
+    transition: transform 0.8s ease-in-out;
+    transform-origin: center;
+  }
+
+
+
+  .menuitem:hover {
+    transform: scale(1.3);
   }
 
   .textAboutHusetContainer {
