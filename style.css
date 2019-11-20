@@ -346,6 +346,11 @@ h1 {
   background-color: var(--light-grey);
 }
 
+
+.eventName {
+  font-size: 1.3rem;
+}
+
 .text {
   padding: 0 0 3rem 0;
 }
@@ -1237,6 +1242,11 @@ screen and (max-height:820px) {
     justify-content: center;
   }
 
+  .videoAboutHuset {
+    width: 450px;
+    height: 300px;
+  }
+
 
 }
 
@@ -1298,6 +1308,7 @@ screen and (max-height:820px) {
   .calendar {
     height: fit-content;
   }
+
 
   .volunteerEvents {
     width: 100%;
