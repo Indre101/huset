@@ -589,6 +589,10 @@ textarea.input {
   background-repeat: no-repeat;
 }
 
+.eventImg:hover {
+  opacity: 0.65;
+}
+
 .volunteerBtn {
   color: white;
   background: var(--dark-green);
